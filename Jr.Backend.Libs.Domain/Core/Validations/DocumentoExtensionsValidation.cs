@@ -8,5 +8,10 @@ namespace Jr.Backend.Libs.Domain.Core.Validations
         {
             return ruleBuilder.SetValidator(new CPFValidator<T, string>());
         }
+
+        public static IRuleBuilderOptions<T, string> CnpjValido<T>(this IRuleBuilder<T, string> ruleBuilder)
+        {
+            return ruleBuilder.SetValidator(new CNPJValidator<T, string>());
+        }
     }
 }

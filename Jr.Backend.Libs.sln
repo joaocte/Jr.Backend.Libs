@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31424.327
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jr.Backend.Libs", "Jr.Backend.Libs\Jr.Backend.Libs.csproj", "{4941D19C-FA52-4F65-83AF-A72B0AD571FE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jr.Backend.Libs", "Jr.Backend.Libs\Jr.Backend.Libs.csproj", "{4941D19C-FA52-4F65-83AF-A72B0AD571FE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jr.Backend.Libs.Domain", "Jr.Backend.Libs.Domain\Jr.Backend.Libs.Domain.csproj", "{54376170-58C8-4B56-B43E-8D5564F08781}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{4941D19C-FA52-4F65-83AF-A72B0AD571FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4941D19C-FA52-4F65-83AF-A72B0AD571FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4941D19C-FA52-4F65-83AF-A72B0AD571FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54376170-58C8-4B56-B43E-8D5564F08781}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54376170-58C8-4B56-B43E-8D5564F08781}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54376170-58C8-4B56-B43E-8D5564F08781}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54376170-58C8-4B56-B43E-8D5564F08781}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

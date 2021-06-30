@@ -1,4 +1,5 @@
-﻿using Jr.Backend.Libs.Infrastructure.Repository.MongoDb.Interfaces;
+﻿using Jr.Backend.Libs.Infrastructure.Repository.Interfaces;
+using Jr.Backend.Libs.Infrastructure.Repository.MongoDb.Interfaces;
 using MongoDB.Driver;
 using ServiceStack;
 using System.Collections.Generic;

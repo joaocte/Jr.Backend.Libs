@@ -1,9 +1,10 @@
-﻿using Jr.Backend.Libs.Infrastructure.Repository.MongoDb.Interfaces;
+﻿using Jr.Backend.Libs.Infrastructure.Repository.Interfaces;
+using Jr.Backend.Libs.Infrastructure.Repository.MongoDb.Interfaces;
 using System.Threading.Tasks;
 
 namespace Jr.Backend.Libs.Infrastructure.Repository.MongoDb.UoW
 {
-    public class UnitOfWork : Interfaces.IUnitOfWork
+    public class UnitOfWork : IUnitOfWork
     {
         private readonly IMongoContext _context;
         private bool disposedValue;

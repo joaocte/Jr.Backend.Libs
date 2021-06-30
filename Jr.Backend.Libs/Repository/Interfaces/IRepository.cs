@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Jr.Backend.Libs.Infrastructure.Repository.MongoDb.Interfaces
+namespace Jr.Backend.Libs.Infrastructure.Repository.Interfaces
 {
     public interface IRepository<T> : IDisposable where T : class
     {

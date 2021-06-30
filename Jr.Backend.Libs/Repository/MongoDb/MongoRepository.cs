@@ -64,7 +64,7 @@ namespace Jr.Backend.Libs.Infrastructure.Repository.MongoDb
         {
             if (disposing)
             {
-                _context?.Dispose();
+                _context.Dispose();
             }
 
             _dbSet = null;

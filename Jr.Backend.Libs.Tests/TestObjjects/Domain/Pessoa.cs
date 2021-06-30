@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Jr.Backend.Libs.Tests.TestObjjects
+namespace Jr.Backend.Libs.Tests.TestObjjects.Domain
 {
-    public class Empresa
+    public class Pessoa
     {
-        public string Cnpj { get; set; }
+        public string Cpf { get; set; }
     }
 }

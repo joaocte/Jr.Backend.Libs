@@ -2,6 +2,7 @@
 using FluentValidation.Results;
 using Jr.Backend.Libs.Domain.Core.Validations;
 using Jr.Backend.Libs.Tests.TestObjjects;
+using Jr.Backend.Libs.Tests.TestObjjects.Domain;
 using System.Linq;
 using Xunit;
 

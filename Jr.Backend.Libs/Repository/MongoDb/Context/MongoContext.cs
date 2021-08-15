@@ -15,7 +15,7 @@ namespace Jr.Backend.Libs.Infrastructure.Repository.MongoDb.Context
         public MongoClient MongoClient { get; set; }
         private readonly List<Func<Task>> commands;
 
-        private IConfiguration configuration;
+        private readonly IConfiguration configuration;
 
         /// <inheritdoc/>
         public MongoContext(IConfiguration configuration)
@@ -29,15 +29,15 @@ namespace Jr.Backend.Libs.Infrastructure.Repository.MongoDb.Context
         {
             ConfigureMongo();
 
-            using (Session = await MongoClient.StartSessionAsync())
+            using (Session = await MongoClient.StartSessionAsync().ConfigureAwait(false))
             {
                 Session.StartTransaction();
 
                 var commandTasks = commands.Select(c => c());
 
-                await Task.WhenAll(commandTasks);
+                await Task.WhenAll(commandTasks).ConfigureAwait(false);
 
-                await Session.CommitTransactionAsync();
+                await Session.CommitTransactionAsync().ConfigureAwait(false);
             }
 
             return commands.Count;
@@ -64,7 +64,6 @@ namespace Jr.Backend.Libs.Infrastructure.Repository.MongoDb.Context
         }
 
         /// <inheritdoc/>
-
         public void Dispose()
         {
             Session?.Dispose();
@@ -72,10 +71,6 @@ namespace Jr.Backend.Libs.Infrastructure.Repository.MongoDb.Context
         }
 
         /// <inheritdoc/>
-
-        public void AddCommand(Func<Task> func)
-        {
-            commands.Add(func);
-        }
+        public async Task AddCommand(Func<Task> func) => await Task.Run(() => commands.Add(func)).ConfigureAwait(false);
     }
 }

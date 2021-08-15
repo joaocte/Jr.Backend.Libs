@@ -18,7 +18,9 @@ namespace Jr.Backend.Libs.Infrastructure.Repository.MongoDb.UoW
         /// <inheritdoc/>
         public async Task<bool> CommitAsync()
         {
-            var changeAmount = await _context.SaveChanges();
+            var changeAmount = await _context
+                .SaveChanges()
+                .ConfigureAwait(false);
 
             return changeAmount > 0;
         }

@@ -12,8 +12,8 @@ namespace Jr.Backend.Libs.Infrastructure.Repository.MongoDb
     {
         protected readonly IMongoContext _context;
         protected IMongoCollection<TEntity> _dbSet;
-        /// <inheritdoc/>
 
+        /// <inheritdoc/>
         protected MongoRepository(IMongoContext context, string collectionName)
         {
             this._context = context;
@@ -22,44 +22,43 @@ namespace Jr.Backend.Libs.Infrastructure.Repository.MongoDb
         }
 
         /// <inheritdoc/>
-
         public virtual async Task AddAsync(TEntity obj)
         {
-            _context.AddCommand(() => _dbSet.InsertOneAsync(obj));
+            await _context.AddCommand(() => _dbSet.InsertOneAsync(obj)).ConfigureAwait(false);
         }
 
         /// <inheritdoc/>
-
         public virtual async Task<TEntity> GetByIdAsync(string id)
         {
-            var data = await _dbSet.FindAsync(Builders<TEntity>.Filter.Eq("_id", id));
+            var data = await _dbSet
+                .FindAsync(Builders<TEntity>.Filter.Eq("_id", id))
+                .ConfigureAwait(false);
+
             return data.SingleOrDefault();
         }
 
         /// <inheritdoc/>
-
         public virtual async Task<IEnumerable<TEntity>> GetAllAsync()
         {
-            var all = await _dbSet.FindAsync(Builders<TEntity>.Filter.Empty);
-            return await all.ToListAsync();
+            var all = await _dbSet.
+                FindAsync(Builders<TEntity>.Filter.Empty)
+                .ConfigureAwait(false);
+            return await all.ToListAsync().ConfigureAwait(false);
         }
 
         /// <inheritdoc/>
-
         public virtual async Task UpdateAsync(TEntity obj)
         {
-            _context.AddCommand(() => _dbSet.ReplaceOneAsync(Builders<TEntity>.Filter.Eq("_id", obj.GetId()), obj));
+            await _context.AddCommand(() => _dbSet.ReplaceOneAsync(Builders<TEntity>.Filter.Eq("_id", obj.GetId()), obj)).ConfigureAwait(false);
         }
 
         /// <inheritdoc/>
-
         public virtual async Task RemoveAsync(string id)
         {
-            _context.AddCommand(() => _dbSet.DeleteOneAsync(Builders<TEntity>.Filter.Eq("_id", id)));
+            await _context.AddCommand(() => _dbSet.DeleteOneAsync(Builders<TEntity>.Filter.Eq("_id", id))).ConfigureAwait(false);
         }
 
         /// <inheritdoc/>
-
         protected virtual void Dispose(bool disposing)
         {
             if (disposing)
@@ -71,10 +70,6 @@ namespace Jr.Backend.Libs.Infrastructure.Repository.MongoDb
         }
 
         /// <inheritdoc/>
-
-        public void Dispose()
-        {
-            Dispose(true);
-        }
+        public void Dispose() => Dispose(true);
     }
 }

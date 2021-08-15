@@ -14,10 +14,10 @@ namespace Jr.Backend.Libs.Infrastructure.DependencyInjection
 {
     public static class ServicesDependency
     {
-        public static void AddServiceDependency(this IServiceCollection services)
+        public static void AddServiceDependencyJrInfrastructure(this IServiceCollection services)
         {
             var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")?.ToLowerInvariant();
-            services.AddScoped<IMongoContext>((p) =>
+            services.AddScoped<IMongoContext>((_) =>
             {
                 var config = new ConfigurationBuilder()
                                  .SetBasePath(Directory.GetCurrentDirectory())

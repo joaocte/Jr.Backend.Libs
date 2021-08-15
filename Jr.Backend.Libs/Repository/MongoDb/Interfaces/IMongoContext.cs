@@ -6,7 +6,7 @@ namespace Jr.Backend.Libs.Infrastructure.Repository.MongoDb.Interfaces
 {
     public interface IMongoContext : IDisposable
     {
-        void AddCommand(Func<Task> func);
+        Task AddCommand(Func<Task> func);
 
         Task<int> SaveChanges();
 

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace Jr.Backend.Libs.Domain.Interfaces
+namespace Jr.Backend.Libs.Domain.Interfaces.Repository
 {
     public interface IUnitOfWork : IDisposable
     {

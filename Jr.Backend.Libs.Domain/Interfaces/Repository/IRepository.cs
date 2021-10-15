@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Jr.Backend.Libs.Domain.Interfaces
+namespace Jr.Backend.Libs.Domain.Interfaces.Repository
 {
     public interface IRepository<T> : IDisposable where T : class
     {

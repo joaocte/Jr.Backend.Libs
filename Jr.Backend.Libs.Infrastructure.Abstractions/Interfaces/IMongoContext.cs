@@ -2,7 +2,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace Jr.Backend.Libs.Infrastructure.Repository.MongoDb.Interfaces
+namespace Jr.Backend.Libs.Infrastructure.Abstractions.Interfaces
 {
     public interface IMongoContext : IDisposable
     {

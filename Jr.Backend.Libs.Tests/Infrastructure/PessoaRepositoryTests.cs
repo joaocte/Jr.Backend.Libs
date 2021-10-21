@@ -1,14 +1,11 @@
-﻿using Jr.Backend.Libs.Infrastructure.Repository.MongoDb.Interfaces;
+﻿using Jr.Backend.Libs.Infrastructure.Abstractions.Interfaces;
 using Jr.Backend.Libs.Tests.TestObjjects.Domain;
 using Jr.Backend.Libs.Tests.TestObjjects.Infra;
 using MongoDB.Driver;
 using NSubstitute;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace Jr.Backend.Libs.Tests.Infrastructure

@@ -1,14 +1,9 @@
-﻿using Jr.Backend.Libs.Infrastructure.Repository.MongoDb.Context;
-using Jr.Backend.Libs.Infrastructure.Repository.MongoDb.Interfaces;
+﻿using Jr.Backend.Libs.Infrastructure.Abstractions.Interfaces;
+using Jr.Backend.Libs.Infrastructure.Repository.MongoDb.Context;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
-using System.Configuration;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Jr.Backend.Libs.Infrastructure.DependencyInjection
 {

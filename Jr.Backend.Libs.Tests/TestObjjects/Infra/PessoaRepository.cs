@@ -1,12 +1,6 @@
-﻿using Jr.Backend.Libs.Infrastructure.Repository.MongoDb;
-using Jr.Backend.Libs.Infrastructure.Repository.MongoDb.Interfaces;
-using Jr.Backend.Libs.Tests.Domain;
+﻿using Jr.Backend.Libs.Infrastructure.Abstractions.Interfaces;
+using Jr.Backend.Libs.Infrastructure.Repository.MongoDb;
 using Jr.Backend.Libs.Tests.TestObjjects.Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Jr.Backend.Libs.Tests.TestObjjects.Infra
 {

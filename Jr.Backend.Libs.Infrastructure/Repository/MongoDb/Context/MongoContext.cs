@@ -1,4 +1,4 @@
-﻿using Jr.Backend.Libs.Infrastructure.Repository.MongoDb.Interfaces;
+﻿using Jr.Backend.Libs.Infrastructure.Abstractions.Interfaces;
 using Microsoft.Extensions.Configuration;
 using MongoDB.Driver;
 using System;

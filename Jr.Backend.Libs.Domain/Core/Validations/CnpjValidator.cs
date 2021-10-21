@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Jr.Backend.Libs.Domain.Core.Validations
+﻿namespace Jr.Backend.Libs.Domain.Core.Validations
 {
     public class CNPJValidator<T, TProperty> : DocumentoGenericoValidator<T, TProperty>
     {

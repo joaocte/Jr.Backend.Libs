@@ -1,5 +1,5 @@
-﻿using Jr.Backend.Libs.Domain.Interfaces.Repository;
-using Jr.Backend.Libs.Infrastructure.Repository.MongoDb.Interfaces;
+﻿using Jr.Backend.Libs.Domain.Abstractions.Interfaces.Repository;
+using Jr.Backend.Libs.Infrastructure.Abstractions.Interfaces;
 using System.Threading.Tasks;
 
 namespace Jr.Backend.Libs.Infrastructure.Repository.MongoDb.UoW

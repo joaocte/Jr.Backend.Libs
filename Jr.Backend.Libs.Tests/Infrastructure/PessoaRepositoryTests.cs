@@ -1,4 +1,4 @@
-﻿using Jr.Backend.Libs.Infrastructure.Abstractions.Interfaces;
+﻿using Jr.Backend.Libs.Infrastructure.MongoDB.Abstractions.Interfaces;
 using Jr.Backend.Libs.Tests.TestObjjects.Domain;
 using Jr.Backend.Libs.Tests.TestObjjects.Infra;
 using MongoDB.Driver;

@@ -15,11 +15,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Messaging", "Messaging", "{
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jr.Backend.Libs.Messaging.Abstractions", "Jr.Backend.Libs.Messaging.Abstractions\Jr.Backend.Libs.Messaging.Abstractions.csproj", "{8089483E-2ED4-438F-97FB-629F43DE4B6E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jr.Backend.Libs.Infrastructure.Abstractions", "Jr.Backend.Libs.Infrastructure.Abstractions\Jr.Backend.Libs.Infrastructure.Abstractions.csproj", "{3810EA8D-A155-4806-B2B3-D7594F06F45C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jr.Backend.Libs.Infrastructure.MongoDB.Abstractions", "Jr.Backend.Libs.Infrastructure.Abstractions\Jr.Backend.Libs.Infrastructure.MongoDB.Abstractions.csproj", "{3810EA8D-A155-4806-B2B3-D7594F06F45C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jr.Backend.Libs.Domain.Abstractions", "Jr.Backend.Libs.Domain.Abstractions\Jr.Backend.Libs.Domain.Abstractions.csproj", "{73025A9B-7037-499B-B0FB-BA046C4ABC51}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jr.Backend.Libs.Infrastructure", "Jr.Backend.Libs.Infrastructure\Jr.Backend.Libs.Infrastructure.csproj", "{5FF8E64B-493D-4B83-B948-2C24643E990C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jr.Backend.Libs.Infrastructure.MongoDB", "Jr.Backend.Libs.Infrastructure\Jr.Backend.Libs.Infrastructure.MongoDB.csproj", "{5FF8E64B-493D-4B83-B948-2C24643E990C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

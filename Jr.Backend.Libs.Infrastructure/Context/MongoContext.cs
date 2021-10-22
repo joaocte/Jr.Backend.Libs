@@ -1,4 +1,4 @@
-﻿using Jr.Backend.Libs.Infrastructure.Abstractions.Interfaces;
+﻿using Jr.Backend.Libs.Infrastructure.MongoDB.Abstractions.Interfaces;
 using Microsoft.Extensions.Configuration;
 using MongoDB.Driver;
 using System;
@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Jr.Backend.Libs.Infrastructure.Repository.MongoDb.Context
+namespace Jr.Backend.Libs.Infrastructure.MongoDB.Context
 {
     public class MongoContext : IMongoContext
     {

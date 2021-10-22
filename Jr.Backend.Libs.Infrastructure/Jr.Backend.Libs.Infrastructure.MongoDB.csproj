@@ -7,6 +7,8 @@
 		<AssemblyVersion>1.0.0.1</AssemblyVersion>
 		<FileVersion>1.0.0.1</FileVersion>
 		<Version>1.0.0-beta-1</Version>
+		<AssemblyName>Jr.Backend.Libs.Infrastructure.MongoDB</AssemblyName>
+		<RootNamespace>Jr.Backend.Libs.Infrastructure.MongoDB</RootNamespace>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -24,6 +26,6 @@
 	<ItemGroup>
 		<ProjectReference Include="..\Jr.Backend.Libs.Domain.Abstractions\Jr.Backend.Libs.Domain.Abstractions.csproj" />
 		<ProjectReference Include="..\Jr.Backend.Libs.Domain\Jr.Backend.Libs.Domain.csproj" />
-		<ProjectReference Include="..\Jr.Backend.Libs.Infrastructure.Abstractions\Jr.Backend.Libs.Infrastructure.Abstractions.csproj" />
+		<ProjectReference Include="..\Jr.Backend.Libs.Infrastructure.Abstractions\Jr.Backend.Libs.Infrastructure.MongoDB.Abstractions.csproj" />
 	</ItemGroup>
 </Project>

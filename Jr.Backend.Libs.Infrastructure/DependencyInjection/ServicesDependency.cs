@@ -1,11 +1,11 @@
-﻿using Jr.Backend.Libs.Infrastructure.Abstractions.Interfaces;
-using Jr.Backend.Libs.Infrastructure.Repository.MongoDb.Context;
+﻿using Jr.Backend.Libs.Infrastructure.MongoDB.Abstractions.Interfaces;
+using Jr.Backend.Libs.Infrastructure.MongoDB.Context;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.IO;
 
-namespace Jr.Backend.Libs.Infrastructure.DependencyInjection
+namespace Jr.Backend.Libs.Infrastructure.MongoDB.DependencyInjection
 {
     public static class ServicesDependency
     {

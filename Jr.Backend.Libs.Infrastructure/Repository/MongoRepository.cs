@@ -1,12 +1,12 @@
 ﻿using Jr.Backend.Libs.Domain.Abstractions.Interfaces.Repository;
-using Jr.Backend.Libs.Infrastructure.Abstractions.Interfaces;
+using Jr.Backend.Libs.Infrastructure.MongoDB.Abstractions.Interfaces;
 using MongoDB.Driver;
 using ServiceStack;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Jr.Backend.Libs.Infrastructure.Repository.MongoDb
+namespace Jr.Backend.Libs.Infrastructure.MongoDB.Repository
 {
     public abstract class MongoRepository<TEntity> : IRepository<TEntity> where TEntity : class
     {

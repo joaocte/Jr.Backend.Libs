@@ -1,19 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Jr.Backend.Libs.Domain.Abstractions.Interfaces.Repository
 {
     public interface IRepository<T> : IDisposable where T : class
     {
-        Task AddAsync(T obj);
+        Task AddAsync(T obj, CancellationToken cancellationToken = default);
 
-        Task<T> GetByIdAsync(string id);
+        Task<T> GetByIdAsync(object id, CancellationToken cancellationToken = default);
 
-        Task<IEnumerable<T>> GetAllAsync();
+        Task<IEnumerable<T>> GetAllAsync(CancellationToken cancellationToken = default);
 
-        Task UpdateAsync(T obj);
+        Task UpdateAsync(T obj, CancellationToken cancellationToken = default);
 
-        Task RemoveAsync(string id);
+        Task RemoveAsync(object id, CancellationToken cancellationToken = default);
     }
 }

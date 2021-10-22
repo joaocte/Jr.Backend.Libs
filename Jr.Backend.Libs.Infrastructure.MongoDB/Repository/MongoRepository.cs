@@ -4,6 +4,7 @@ using MongoDB.Driver;
 using ServiceStack;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Jr.Backend.Libs.Infrastructure.MongoDB.Repository
@@ -22,40 +23,40 @@ namespace Jr.Backend.Libs.Infrastructure.MongoDB.Repository
         }
 
         /// <inheritdoc/>
-        public virtual async Task AddAsync(TEntity obj)
+        public virtual async Task AddAsync(TEntity obj, CancellationToken cancellationToken = default)
         {
-            await _context.AddCommand(() => _dbSet.InsertOneAsync(obj)).ConfigureAwait(false);
+            await _context.AddCommand(() => _dbSet.InsertOneAsync(obj, null, cancellationToken)).ConfigureAwait(false);
         }
 
         /// <inheritdoc/>
-        public virtual async Task<TEntity> GetByIdAsync(string id)
+        public virtual async Task<TEntity> GetByIdAsync(object id, CancellationToken cancellationToken = default)
         {
             var data = await _dbSet
-                .FindAsync(Builders<TEntity>.Filter.Eq("_id", id))
+                .FindAsync(Builders<TEntity>.Filter.Eq("_id", id), null, cancellationToken)
                 .ConfigureAwait(false);
 
             return data.SingleOrDefault();
         }
 
         /// <inheritdoc/>
-        public virtual async Task<IEnumerable<TEntity>> GetAllAsync()
+        public virtual async Task<IEnumerable<TEntity>> GetAllAsync(CancellationToken cancellationToken = default)
         {
             var all = await _dbSet.
-                FindAsync(Builders<TEntity>.Filter.Empty)
+                FindAsync(Builders<TEntity>.Filter.Empty, null, cancellationToken)
                 .ConfigureAwait(false);
             return await all.ToListAsync().ConfigureAwait(false);
         }
 
         /// <inheritdoc/>
-        public virtual async Task UpdateAsync(TEntity obj)
+        public virtual async Task UpdateAsync(TEntity obj, CancellationToken cancellationToken = default)
         {
             await _context.AddCommand(() => _dbSet.ReplaceOneAsync(Builders<TEntity>.Filter.Eq("_id", obj.GetId()), obj)).ConfigureAwait(false);
         }
 
         /// <inheritdoc/>
-        public virtual async Task RemoveAsync(string id)
+        public virtual async Task RemoveAsync(object id, CancellationToken cancellationToken = default)
         {
-            await _context.AddCommand(() => _dbSet.DeleteOneAsync(Builders<TEntity>.Filter.Eq("_id", id))).ConfigureAwait(false);
+            await _context.AddCommand(() => _dbSet.DeleteOneAsync(Builders<TEntity>.Filter.Eq("_id", id), cancellationToken)).ConfigureAwait(false);
         }
 
         /// <inheritdoc/>

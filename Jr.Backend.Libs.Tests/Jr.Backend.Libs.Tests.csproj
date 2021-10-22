@@ -28,6 +28,8 @@
 		<ProjectReference Include="..\Jr.Backend.Libs.Domain.Abstractions\Jr.Backend.Libs.Domain.Abstractions.csproj" />
 		<ProjectReference Include="..\Jr.Backend.Libs.Domain\Jr.Backend.Libs.Domain.csproj" />
 		<ProjectReference Include="..\Jr.Backend.Libs.Infrastructure.Abstractions\Jr.Backend.Libs.Infrastructure.MongoDB.Abstractions.csproj" />
+		<ProjectReference Include="..\Jr.Backend.Libs.Infrastructure.MongoDB.Abstractions\Jr.Backend.Libs.Infrastructure.MongoDB.Abstractions.csproj" />
+		<ProjectReference Include="..\Jr.Backend.Libs.Infrastructure.MongoDB\Jr.Backend.Libs.Infrastructure.MongoDB.csproj" />
 		<ProjectReference Include="..\Jr.Backend.Libs.Infrastructure\Jr.Backend.Libs.Infrastructure.MongoDB.csproj" />
 		<ProjectReference Include="..\Jr.Backend.Libs.Messaging.Abstractions\Jr.Backend.Libs.Messaging.Abstractions.csproj" />
 	</ItemGroup>

@@ -1,17 +1,16 @@
 ﻿using Jr.Backend.Libs.Infrastructure.EntityFramework.Abstractions.QueryRepository;
-using Jr.Backend.Libs.Infrastructure.EntityFramework.Abstractions.QueryRepository.Interfaces;
 using Jr.Backend.Libs.Infrastructure.EntityFramework.Abstractions.QueryRepository.Extensions;
+using Jr.Backend.Libs.Infrastructure.EntityFramework.Abstractions.QueryRepository.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Query;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore.Metadata;
-using System.Globalization;
 
 namespace Jr.Backend.Libs.Infrastructure.EntityFramework.QueryRepository
 {

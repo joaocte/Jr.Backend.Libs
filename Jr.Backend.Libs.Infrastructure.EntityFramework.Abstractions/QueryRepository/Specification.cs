@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Jr.Backend.Libs.Infrastructure.EntityFramework.Abstractions.QueryRepository
+﻿namespace Jr.Backend.Libs.Infrastructure.EntityFramework.Abstractions.QueryRepository
 {
     /// <summary>
     /// This object hold the query specifications.

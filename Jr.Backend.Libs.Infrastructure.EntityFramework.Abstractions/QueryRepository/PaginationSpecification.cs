@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Jr.Backend.Libs.Infrastructure.EntityFramework.Abstractions.QueryRepository
+﻿namespace Jr.Backend.Libs.Infrastructure.EntityFramework.Abstractions.QueryRepository
 {
     public class PaginationSpecification<T> : SpecificationBase<T>
          where T : class

@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Linq;
-using System.Linq.Expressions;
 using System.Data;
+using System.Linq;
 using System.Linq.Dynamic.Core;
+using System.Linq.Expressions;
 
 namespace Jr.Backend.Libs.Infrastructure.EntityFramework.Abstractions.QueryRepository.Extensions
 {

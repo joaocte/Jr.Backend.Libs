@@ -9,8 +9,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="FluentValidation" Version="10.2.3" />
-		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.10.0" />
+		<PackageReference Include="FluentValidation" Version="10.3.4" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="5.0.11" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
+		<PackageReference Include="Moq" Version="4.16.1" />
 		<PackageReference Include="NSubstitute" Version="4.2.2" />
 		<PackageReference Include="NSubstitute.Analyzers.CSharp" Version="1.0.14" />
 		<PackageReference Include="xunit" Version="2.4.1" />
@@ -18,7 +20,7 @@
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 			<PrivateAssets>all</PrivateAssets>
 		</PackageReference>
-		<PackageReference Include="coverlet.collector" Version="3.0.3">
+		<PackageReference Include="coverlet.collector" Version="3.1.0">
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 			<PrivateAssets>all</PrivateAssets>
 		</PackageReference>
@@ -28,6 +30,8 @@
 		<ProjectReference Include="..\Jr.Backend.Libs.Domain.Abstractions\Jr.Backend.Libs.Domain.Abstractions.csproj" />
 		<ProjectReference Include="..\Jr.Backend.Libs.Domain\Jr.Backend.Libs.Domain.csproj" />
 		<ProjectReference Include="..\Jr.Backend.Libs.Infrastructure.Abstractions\Jr.Backend.Libs.Infrastructure.MongoDB.Abstractions.csproj" />
+		<ProjectReference Include="..\Jr.Backend.Libs.Infrastructure.EntityFramework.Abstractions\Jr.Backend.Libs.Infrastructure.EntityFramework.Abstractions.csproj" />
+		<ProjectReference Include="..\Jr.Backend.Libs.Infrastructure.EntityFramework\Jr.Backend.Libs.Infrastructure.EntityFramework.csproj" />
 		<ProjectReference Include="..\Jr.Backend.Libs.Infrastructure.MongoDB.Abstractions\Jr.Backend.Libs.Infrastructure.MongoDB.Abstractions.csproj" />
 		<ProjectReference Include="..\Jr.Backend.Libs.Infrastructure.MongoDB\Jr.Backend.Libs.Infrastructure.MongoDB.csproj" />
 		<ProjectReference Include="..\Jr.Backend.Libs.Infrastructure\Jr.Backend.Libs.Infrastructure.MongoDB.csproj" />

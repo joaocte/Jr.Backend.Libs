@@ -31,7 +31,7 @@ namespace Jr.Backend.Libs.Tests.Infrastructure
         [Fact]
         public void Should_Return_True_When_Any_ID_Exists()
         {
-            Pessoa pessoa = new Pessoa { Cpf = "1", Nome = "Nome" };
+            Pessoa pessoa = new() { Cpf = "1", Nome = "Nome" };
             using var context = new PessoaDbContext(ContextOptions);
             pessoaQueryRepository = new PessoaQueryRepository(context);
             var PessoaDeveExisitir = pessoaQueryRepository.ExistsAsync().Result;
@@ -42,7 +42,7 @@ namespace Jr.Backend.Libs.Tests.Infrastructure
         [Fact]
         public void Should_Return_Person_When_Person_Exists()
         {
-            Pessoa pessoa = new Pessoa { Cpf = "1", Nome = "Nome" };
+            Pessoa pessoa = new() { Cpf = "1", Nome = "Nome" };
             using var context = new PessoaDbContext(ContextOptions);
             pessoaQueryRepository = new PessoaQueryRepository(context);
             var retorno = pessoaQueryRepository.GetAsync(x => x.Cpf == pessoa.Cpf).Result;
@@ -55,7 +55,7 @@ namespace Jr.Backend.Libs.Tests.Infrastructure
         [Fact]
         public void Should_No_Return_Person_When_Person_No_Exists()
         {
-            Pessoa pessoa = new Pessoa { Cpf = "2", Nome = "Nome" };
+            Pessoa pessoa = new() { Cpf = "2", Nome = "Nome" };
             using var context = new PessoaDbContext(ContextOptions);
             pessoaQueryRepository = new PessoaQueryRepository(context);
             var retorno = pessoaQueryRepository.GetAsync(x => x.Cpf == pessoa.Cpf).Result;

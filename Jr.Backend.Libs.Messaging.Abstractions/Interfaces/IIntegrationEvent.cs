@@ -2,13 +2,13 @@
 
 namespace Jr.Backend.Libs.Messaging.Abstractions
 {
-    public abstract class IntegrationEvent
+    public abstract class IIntegrationEvent
     {
         public Guid Id { get; }
         public DateTime PublicatedDate { get; }
         public string PublicatedTime { get; }
 
-        protected IntegrationEvent()
+        protected IIntegrationEvent()
         {
             var UtcDate = DateTime.UtcNow;
             Id = Guid.NewGuid();

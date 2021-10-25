@@ -1,6 +1,6 @@
 ﻿namespace Jr.Backend.Libs.Messaging.Abstractions.Interfaces
 {
-    public interface IMessageFormatter<TypeMessage, TTMessageOut> where TypeMessage : IntegrationEvent
+    public interface IMessageFormatter<TypeMessage, TTMessageOut> where TypeMessage : IIntegrationEvent
     {
         TTMessageOut Format(TypeMessage message);
     }

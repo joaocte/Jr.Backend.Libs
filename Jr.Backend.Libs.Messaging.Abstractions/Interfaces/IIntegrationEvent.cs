@@ -1,12 +1,12 @@
 ﻿using System;
 
-namespace Jr.Backend.Libs.Messaging.Abstractions
+namespace Jr.Backend.Libs.Messaging.Abstractions.Interfaces
 {
     public abstract class IIntegrationEvent
     {
-        public Guid Id { get; }
-        public DateTime PublicatedDate { get; }
-        public string PublicatedTime { get; }
+        protected Guid Id { get; }
+        protected DateTime PublicatedDate { get; }
+        protected string PublicatedTime { get; }
 
         protected IIntegrationEvent()
         {

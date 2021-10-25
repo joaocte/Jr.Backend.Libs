@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace Jr.Backend.Libs.Infrastructure.EntityFramework.Abstractions.QueryRepository
 {
+    /// <summary>
+    /// Contains all the query methods.
+    /// </summary>
     public interface IQueryRepository<TEntity> where TEntity : class
     {
         /// <summary>

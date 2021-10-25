@@ -16,7 +16,7 @@ namespace Jr.Backend.Libs.Tests.Infrastructure
         private IPessoaQueryRepository pessoaQueryRepository;
 
         [Fact]
-        public void WhenVerifyThatAPersonExistsByIdReturnTrue()
+        public void Should_Return_True_When_ID_Exists()
         {
             using var context = new PessoaDbContext(ContextOptions);
             pessoaQueryRepository = new PessoaQueryRepository(context);
@@ -26,7 +26,7 @@ namespace Jr.Backend.Libs.Tests.Infrastructure
         }
 
         [Fact]
-        public void WhenVerifyThatAPersonNotExistsByIdReturnFalse()
+        public void Should_Return_False_When_ID_No_Exists()
         {
             using var context = new PessoaDbContext(ContextOptions);
             pessoaQueryRepository = new PessoaQueryRepository(context);
@@ -36,7 +36,7 @@ namespace Jr.Backend.Libs.Tests.Infrastructure
         }
 
         [Fact]
-        public void WhenVerifyThatAPersonWithoutParametersExistsReturnTrue()
+        public void Should_Return_True_When_Any_ID_Exists()
         {
             Pessoa pessoa = new Pessoa { Cpf = "1", Nome = "Nome" };
             using var context = new PessoaDbContext(ContextOptions);
@@ -44,6 +44,30 @@ namespace Jr.Backend.Libs.Tests.Infrastructure
             var PessoaDeveExisitir = pessoaQueryRepository.ExistsAsync().Result;
 
             Assert.True(PessoaDeveExisitir);
+        }
+
+        [Fact]
+        public void Should_Return_Person_When_Person_Exists()
+        {
+            Pessoa pessoa = new Pessoa { Cpf = "1", Nome = "Nome" };
+            using var context = new PessoaDbContext(ContextOptions);
+            pessoaQueryRepository = new PessoaQueryRepository(context);
+            var retorno = pessoaQueryRepository.GetAsync(x => x.Cpf == pessoa.Cpf).Result;
+
+            Assert.NotNull(retorno);
+            Assert.Equal(pessoa.Cpf, retorno.Cpf);
+            Assert.Equal(pessoa.Nome, retorno.Nome);
+        }
+
+        [Fact]
+        public void Should_No_Return_Person_When_Person_No_Exists()
+        {
+            Pessoa pessoa = new Pessoa { Cpf = "2", Nome = "Nome" };
+            using var context = new PessoaDbContext(ContextOptions);
+            pessoaQueryRepository = new PessoaQueryRepository(context);
+            var retorno = pessoaQueryRepository.GetAsync(x => x.Cpf == pessoa.Cpf).Result;
+
+            Assert.Null(retorno);
         }
     }
 }

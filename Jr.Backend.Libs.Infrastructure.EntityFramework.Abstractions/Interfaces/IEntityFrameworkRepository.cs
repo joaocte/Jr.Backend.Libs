@@ -50,5 +50,6 @@ namespace Jr.Backend.Libs.Infrastructure.EntityFramework.Abstractions.Interfaces
         /// Reset the DbContext state by removing all the tracked and attached entities.
         /// </summary>
         void ResetContextState();
+        Task<T> GetByIdAsync(object id, CancellationToken cancellationToken = default);
     }
 }

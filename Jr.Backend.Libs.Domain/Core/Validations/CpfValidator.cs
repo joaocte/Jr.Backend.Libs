@@ -1,15 +1,23 @@
 ﻿namespace Jr.Backend.Libs.Domain.Core.Validations
 {
+    /// <summary>
+    /// Class that validates the CPF
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <typeparam name="TProperty"></typeparam>
     public class CPFValidator<T, TProperty> : DocumentoGenericoValidator<T, TProperty>
     {
+        /// <inheritdoc/>
         internal CPFValidator(int validLength, string errorMessage)
             : base(validLength, errorMessage)
         { }
 
+        /// <inheritdoc/>
         public CPFValidator(string errorMessage)
             : this(11, errorMessage)
         { }
 
+        /// <inheritdoc/>
         public CPFValidator()
             : this("O CPF é inválido!")
         { }

@@ -16,12 +16,15 @@ namespace Jr.Backend.Libs.Infrastructure.EntityFramework
     public class Repository<T> : QueryRepository<T>, IEntityFrameworkRepository<T> where T : class
     {
         private readonly DbContext _dbContext;
+        private bool disposedValue;
 
+        ///<inheritdoc/>
         public Repository(DbContext dbContext) : base(dbContext)
         {
             _dbContext = dbContext;
         }
 
+        ///<inheritdoc/>
         public async Task AddAsync(T entity, CancellationToken cancellationToken = default)
         {
             if (entity == null)
@@ -33,47 +36,38 @@ namespace Jr.Backend.Libs.Infrastructure.EntityFramework
             await _dbContext.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
 
+        ///<inheritdoc/>
         public async Task<IDbContextTransaction> BeginTransactionAsync(IsolationLevel isolationLevel = IsolationLevel.Unspecified, CancellationToken cancellationToken = default)
         {
             IDbContextTransaction dbContextTransaction = await _dbContext.Database.BeginTransactionAsync(isolationLevel, cancellationToken);
             return dbContextTransaction;
         }
 
-        public void Dispose()
-        {
-            throw new NotImplementedException();
-        }
-
+        ///<inheritdoc/>
         public Task<int> ExecuteSqlCommandAsync(string sql, CancellationToken cancellationToken = default)
         {
             return _dbContext.Database.ExecuteSqlRawAsync(sql, cancellationToken);
         }
 
+        ///<inheritdoc/>
         public Task<int> ExecuteSqlCommandAsync(string sql, params object[] parameters)
         {
             return _dbContext.Database.ExecuteSqlRawAsync(sql, parameters);
         }
 
+        ///<inheritdoc/>
         public Task<int> ExecuteSqlCommandAsync(string sql, IEnumerable<object> parameters, CancellationToken cancellationToken = default)
         {
             return _dbContext.Database.ExecuteSqlRawAsync(sql, parameters, cancellationToken);
         }
 
+        ///<inheritdoc/>
         public Task<IEnumerable<T>> GetAllAsync(CancellationToken cancellationToken = default)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<T> GetByIdAsync(object id, CancellationToken cancellationToken = default)
-        {
-            if (id == null)
-            {
-                throw new ArgumentNullException(nameof(id));
-            }
-
-            return await _dbContext.Set<T>().FindAsync(id, cancellationToken).ConfigureAwait(false);
-        }
-
+        ///<inheritdoc/>
         public async Task RemoveAsync(object id, CancellationToken cancellationToken = default)
         {
             if (id == null)
@@ -87,11 +81,13 @@ namespace Jr.Backend.Libs.Infrastructure.EntityFramework
             await _dbContext.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
 
+        ///<inheritdoc/>
         public void ResetContextState()
         {
             _dbContext.ChangeTracker.Clear();
         }
 
+        ///<inheritdoc/>
         public async Task UpdateAsync(T entity, CancellationToken cancellationToken = default)
         {
             if (entity == null)
@@ -130,6 +126,24 @@ namespace Jr.Backend.Libs.Infrastructure.EntityFramework
             }
 
             await _dbContext.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    _dbContext?.Dispose();
+                }
+
+                disposedValue = true;
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(disposing: true);
         }
     }
 }

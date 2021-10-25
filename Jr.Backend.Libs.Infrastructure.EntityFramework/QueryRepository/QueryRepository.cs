@@ -24,10 +24,13 @@ namespace Jr.Backend.Libs.Infrastructure.EntityFramework.QueryRepository
             _dbContext = dbContext;
         }
 
+        /// <inheritdoc/>
         public Task<bool> ExistsAsync(CancellationToken cancellationToken = default)
         {
             return ExistsAsync(null, cancellationToken);
         }
+
+        /// <inheritdoc/>
 
         public async Task<bool> ExistsAsync(Expression<Func<T, bool>> condition, CancellationToken cancellationToken = default)
         {
@@ -35,28 +38,31 @@ namespace Jr.Backend.Libs.Infrastructure.EntityFramework.QueryRepository
 
             if (condition == null)
             {
-                return await query.AnyAsync(cancellationToken);
+                return await query.AnyAsync(cancellationToken).ConfigureAwait(false);
             }
 
-            bool isExists = await query.AnyAsync(condition, cancellationToken).ConfigureAwait(false);
-            return isExists;
+            return await query.AnyAsync(condition, cancellationToken).ConfigureAwait(false);
         }
 
+        /// <inheritdoc/>
         public Task<T> GetAsync(Expression<Func<T, bool>> condition, CancellationToken cancellationToken = default)
         {
             return GetAsync(condition, null, false, cancellationToken);
         }
 
+        /// <inheritdoc/>
         public Task<T> GetAsync(Expression<Func<T, bool>> condition, bool asNoTracking, CancellationToken cancellationToken = default)
         {
             return GetAsync(condition, null, asNoTracking, cancellationToken);
         }
 
+        /// <inheritdoc/>
         public Task<T> GetAsync(Expression<Func<T, bool>> condition, Func<IQueryable<T>, IIncludableQueryable<T, object>> includes, CancellationToken cancellationToken = default)
         {
             return GetAsync(condition, includes, false, cancellationToken);
         }
 
+        /// <inheritdoc/>
         public async Task<T> GetAsync(Expression<Func<T, bool>> condition, Func<IQueryable<T>, IIncludableQueryable<T, object>> includes, bool asNoTracking, CancellationToken cancellationToken = default)
         {
             IQueryable<T> query = _dbContext.Set<T>();
@@ -79,11 +85,13 @@ namespace Jr.Backend.Libs.Infrastructure.EntityFramework.QueryRepository
             return await query.FirstOrDefaultAsync(cancellationToken).ConfigureAwait(false);
         }
 
+        /// <inheritdoc/>
         public Task<T> GetAsync(Specification<T> specification, CancellationToken cancellationToken = default)
         {
             return GetAsync(specification, false, cancellationToken);
         }
 
+        /// <inheritdoc/>
         public async Task<T> GetAsync(Specification<T> specification, bool asNoTracking, CancellationToken cancellationToken = default)
         {
             IQueryable<T> query = _dbContext.Set<T>();
@@ -101,6 +109,7 @@ namespace Jr.Backend.Libs.Infrastructure.EntityFramework.QueryRepository
             return await query.FirstOrDefaultAsync(cancellationToken).ConfigureAwait(false);
         }
 
+        /// <inheritdoc/>
         public async Task<TProjectedType> GetAsync<TProjectedType>(Expression<Func<T, bool>> condition, Expression<Func<T, TProjectedType>> selectExpression, CancellationToken cancellationToken = default)
         {
             if (selectExpression == null)
@@ -118,6 +127,7 @@ namespace Jr.Backend.Libs.Infrastructure.EntityFramework.QueryRepository
             return await query.Select(selectExpression).FirstOrDefaultAsync(cancellationToken).ConfigureAwait(false);
         }
 
+        /// <inheritdoc/>
         public async Task<TProjectedType> GetAsync<TProjectedType>(Specification<T> specification, Expression<Func<T, TProjectedType>> selectExpression, CancellationToken cancellationToken = default)
         {
             if (selectExpression == null)
@@ -135,6 +145,7 @@ namespace Jr.Backend.Libs.Infrastructure.EntityFramework.QueryRepository
             return await query.Select(selectExpression).FirstOrDefaultAsync(cancellationToken).ConfigureAwait(false);
         }
 
+        /// <inheritdoc/>
         public Task<T> GetByIdAsync(object id, CancellationToken cancellationToken = default)
         {
             if (id == null)
@@ -145,6 +156,7 @@ namespace Jr.Backend.Libs.Infrastructure.EntityFramework.QueryRepository
             return GetByIdAsync(id, false, cancellationToken);
         }
 
+        /// <inheritdoc/>
         public Task<T> GetByIdAsync(object id, bool asNoTracking, CancellationToken cancellationToken = default)
         {
             if (id == null)
@@ -155,6 +167,7 @@ namespace Jr.Backend.Libs.Infrastructure.EntityFramework.QueryRepository
             return GetByIdAsync(id, null, asNoTracking, cancellationToken);
         }
 
+        /// <inheritdoc/>
         public Task<T> GetByIdAsync(object id, Func<IQueryable<T>, IIncludableQueryable<T, object>> includes, CancellationToken cancellationToken = default)
         {
             if (id == null)
@@ -165,6 +178,7 @@ namespace Jr.Backend.Libs.Infrastructure.EntityFramework.QueryRepository
             return GetByIdAsync(id, includes, false, cancellationToken);
         }
 
+        /// <inheritdoc/>
         public async Task<T> GetByIdAsync(object id, Func<IQueryable<T>, IIncludableQueryable<T, object>> includes, bool asNoTracking, CancellationToken cancellationToken = default)
         {
             if (id == null)
@@ -215,6 +229,7 @@ namespace Jr.Backend.Libs.Infrastructure.EntityFramework.QueryRepository
             return enity;
         }
 
+        /// <inheritdoc/>
         public async Task<TProjectedType> GetByIdAsync<TProjectedType>(object id, Expression<Func<T, TProjectedType>> selectExpression, CancellationToken cancellationToken = default)
         {
             if (id == null)
@@ -260,12 +275,14 @@ namespace Jr.Backend.Libs.Infrastructure.EntityFramework.QueryRepository
                 .FirstOrDefaultAsync(cancellationToken).ConfigureAwait(false);
         }
 
+        /// <inheritdoc/>
         public async Task<int> GetCountAsync(CancellationToken cancellationToken = default)
         {
             int count = await _dbContext.Set<T>().CountAsync(cancellationToken).ConfigureAwait(false);
             return count;
         }
 
+        /// <inheritdoc/>
         public async Task<int> GetCountAsync(Expression<Func<T, bool>> condition, CancellationToken cancellationToken = default)
         {
             IQueryable<T> query = _dbContext.Set<T>();
@@ -278,6 +295,7 @@ namespace Jr.Backend.Libs.Infrastructure.EntityFramework.QueryRepository
             return await query.CountAsync(cancellationToken).ConfigureAwait(false);
         }
 
+        /// <inheritdoc/>
         public async Task<int> GetCountAsync(IEnumerable<Expression<Func<T, bool>>> conditions, CancellationToken cancellationToken = default)
         {
             IQueryable<T> query = _dbContext.Set<T>();
@@ -293,6 +311,7 @@ namespace Jr.Backend.Libs.Infrastructure.EntityFramework.QueryRepository
             return await query.CountAsync(cancellationToken).ConfigureAwait(false);
         }
 
+        ///<inheritdoc/>
         public async Task<IEnumerable<T1>> GetFromRawSqlAsync<T1>(string sql, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrWhiteSpace(sql))
@@ -305,6 +324,7 @@ namespace Jr.Backend.Libs.Infrastructure.EntityFramework.QueryRepository
             return await _dbContext.GetFromQueryAsync<T1>(sql, parameters, cancellationToken);
         }
 
+        ///<inheritdoc/>
         public async Task<IEnumerable<T1>> GetFromRawSqlAsync<T1>(string sql, object parameter, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrWhiteSpace(sql))
@@ -316,6 +336,7 @@ namespace Jr.Backend.Libs.Infrastructure.EntityFramework.QueryRepository
             return await _dbContext.GetFromQueryAsync<T1>(sql, parameters, cancellationToken);
         }
 
+        ///<inheritdoc/>
         public async Task<IEnumerable<T1>> GetFromRawSqlAsync<T1>(string sql, IEnumerable<object> parameters, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrWhiteSpace(sql))
@@ -326,22 +347,26 @@ namespace Jr.Backend.Libs.Infrastructure.EntityFramework.QueryRepository
             return await _dbContext.GetFromQueryAsync<T1>(sql, parameters, cancellationToken);
         }
 
+        ///<inheritdoc/>
         public Task<IEnumerable<T>> GetListAsync(CancellationToken cancellationToken = default)
         {
             return GetListAsync(false, cancellationToken);
         }
 
+        ///<inheritdoc/>
         public Task<IEnumerable<T>> GetListAsync(bool asNoTracking, CancellationToken cancellationToken = default)
         {
             Func<IQueryable<T>, IIncludableQueryable<T, object>> nullValue = null;
             return GetListAsync(nullValue, asNoTracking, cancellationToken);
         }
 
+        ///<inheritdoc/>
         public Task<IEnumerable<T>> GetListAsync(Func<IQueryable<T>, IIncludableQueryable<T, object>> includes, CancellationToken cancellationToken = default)
         {
             return GetListAsync(includes, false, cancellationToken);
         }
 
+        ///<inheritdoc/>
         public async Task<IEnumerable<T>> GetListAsync(Func<IQueryable<T>, IIncludableQueryable<T, object>> includes, bool asNoTracking, CancellationToken cancellationToken = default)
         {
             IQueryable<T> query = _dbContext.Set<T>();
@@ -359,16 +384,19 @@ namespace Jr.Backend.Libs.Infrastructure.EntityFramework.QueryRepository
             return await query.ToListAsync(cancellationToken).ConfigureAwait(false);
         }
 
+        ///<inheritdoc/>
         public Task<IEnumerable<T>> GetListAsync(Expression<Func<T, bool>> condition, CancellationToken cancellationToken = default)
         {
             return GetListAsync(condition, false, cancellationToken);
         }
 
+        ///<inheritdoc/>
         public Task<IEnumerable<T>> GetListAsync(Expression<Func<T, bool>> condition, bool asNoTracking, CancellationToken cancellationToken = default)
         {
             return GetListAsync(condition, null, asNoTracking, cancellationToken);
         }
 
+        ///<inheritdoc/>
         public async Task<IEnumerable<T>> GetListAsync(Expression<Func<T, bool>> condition, Func<IQueryable<T>, IIncludableQueryable<T, object>> includes, bool asNoTracking = false, CancellationToken cancellationToken = default)
         {
             IQueryable<T> query = _dbContext.Set<T>();
@@ -391,11 +419,13 @@ namespace Jr.Backend.Libs.Infrastructure.EntityFramework.QueryRepository
             return await query.ToListAsync(cancellationToken).ConfigureAwait(false);
         }
 
+        ///<inheritdoc/>
         public Task<IEnumerable<T>> GetListAsync(Specification<T> specification, CancellationToken cancellationToken = default)
         {
             return GetListAsync(specification, false, cancellationToken);
         }
 
+        ///<inheritdoc/>
         public async Task<IEnumerable<T>> GetListAsync(Specification<T> specification, bool asNoTracking, CancellationToken cancellationToken = default)
         {
             IQueryable<T> query = _dbContext.Set<T>();
@@ -413,6 +443,7 @@ namespace Jr.Backend.Libs.Infrastructure.EntityFramework.QueryRepository
             return await query.ToListAsync(cancellationToken).ConfigureAwait(false);
         }
 
+        ///<inheritdoc/>
         public async Task<IEnumerable<TProjectedType>> GetListAsync<TProjectedType>(Expression<Func<T, TProjectedType>> selectExpression, CancellationToken cancellationToken = default)
         {
             if (selectExpression == null)
@@ -426,6 +457,7 @@ namespace Jr.Backend.Libs.Infrastructure.EntityFramework.QueryRepository
             return entities;
         }
 
+        ///<inheritdoc/>
         public async Task<IEnumerable<TProjectedType>> GetListAsync<TProjectedType>(Expression<Func<T, bool>> condition, Expression<Func<T, TProjectedType>> selectExpression, CancellationToken cancellationToken = default)
         {
             if (selectExpression == null)
@@ -446,6 +478,7 @@ namespace Jr.Backend.Libs.Infrastructure.EntityFramework.QueryRepository
             return projectedEntites;
         }
 
+        ///<inheritdoc/>
         public async Task<IEnumerable<TProjectedType>> GetListAsync<TProjectedType>(Specification<T> specification, Expression<Func<T, TProjectedType>> selectExpression, CancellationToken cancellationToken = default)
         {
             if (selectExpression == null)
@@ -464,6 +497,7 @@ namespace Jr.Backend.Libs.Infrastructure.EntityFramework.QueryRepository
                 .ToListAsync(cancellationToken).ConfigureAwait(false);
         }
 
+        ///<inheritdoc/>
         public async Task<PaginatedList<T>> GetListAsync(PaginationSpecification<T> specification, CancellationToken cancellationToken = default)
         {
             if (specification == null)
@@ -475,6 +509,7 @@ namespace Jr.Backend.Libs.Infrastructure.EntityFramework.QueryRepository
             return paginatedList;
         }
 
+        ///<inheritdoc/>
         public async Task<PaginatedList<TProjectedType>> GetListAsync<TProjectedType>(PaginationSpecification<T> specification, Expression<Func<T, TProjectedType>> selectExpression, CancellationToken cancellationToken = default) where TProjectedType : class
         {
             if (specification == null)
@@ -494,11 +529,13 @@ namespace Jr.Backend.Libs.Infrastructure.EntityFramework.QueryRepository
             return paginatedList;
         }
 
+        ///<inheritdoc/>
         public async Task<long> GetLongCountAsync(CancellationToken cancellationToken = default)
         {
             return await _dbContext.Set<T>().LongCountAsync(cancellationToken).ConfigureAwait(false);
         }
 
+        ///<inheritdoc/>
         public async Task<long> GetLongCountAsync(Expression<Func<T, bool>> condition, CancellationToken cancellationToken = default)
         {
             IQueryable<T> query = _dbContext.Set<T>();
@@ -511,6 +548,7 @@ namespace Jr.Backend.Libs.Infrastructure.EntityFramework.QueryRepository
             return await query.LongCountAsync(cancellationToken).ConfigureAwait(false);
         }
 
+        ///<inheritdoc/>
         public async Task<long> GetLongCountAsync(IEnumerable<Expression<Func<T, bool>>> conditions, CancellationToken cancellationToken = default)
         {
             IQueryable<T> query = _dbContext.Set<T>();
@@ -526,6 +564,7 @@ namespace Jr.Backend.Libs.Infrastructure.EntityFramework.QueryRepository
             return await query.LongCountAsync(cancellationToken).ConfigureAwait(false);
         }
 
+        ///<inheritdoc/>
         public IQueryable<T> GetQueryable()
         {
             return _dbContext.Set<T>();

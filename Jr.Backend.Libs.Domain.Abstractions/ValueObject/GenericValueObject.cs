@@ -9,11 +9,11 @@ namespace Jr.Backend.Libs.Domain.Abstractions.ValueObject
     {
         protected static bool EqualOperator(GenericValueObject obj, GenericValueObject otherObj)
         {
-            if (ReferenceEquals(obj, null) ^ ReferenceEquals(otherObj, null))
+            if (obj is null ^ otherObj is null)
             {
                 return false;
             }
-            return ReferenceEquals(obj, null) || obj.Equals(otherObj);
+            return obj?.Equals(otherObj) != false;
         }
 
         public static GenericValueObject Parse(string value)
@@ -23,12 +23,12 @@ namespace Jr.Backend.Libs.Domain.Abstractions.ValueObject
             {
                 return (GenericValueObject)converter.ConvertFromString(value);
             }
-            return default(GenericValueObject);
+            return default;
         }
 
         protected static bool NotEqualOperator(GenericValueObject obj, GenericValueObject otherObj)
         {
-            return !(EqualOperator(obj, otherObj));
+            return !EqualOperator(obj, otherObj);
         }
 
         protected abstract IEnumerable<object> GetEqualityComponents();
@@ -48,7 +48,7 @@ namespace Jr.Backend.Libs.Domain.Abstractions.ValueObject
         public override int GetHashCode()
         {
             return GetEqualityComponents()
-                .Select(x => x != null ? x.GetHashCode() : 0)
+                .Select(x => (x?.GetHashCode()) ?? 0)
                 .Aggregate((x, y) => x ^ y);
         }
     }

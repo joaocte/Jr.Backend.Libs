@@ -3,7 +3,7 @@ using System.Text.Json;
 
 namespace Jr.Backend.Libs.Messaging.Abstractions.Interfaces
 {
-    public abstract class MessageFormatterBase<TypeMessage> : IMessageFormatter<TypeMessage, string> where TypeMessage : MessageType
+    public abstract class MessageFormatterBase<TypeMessage> : IMessageFormatter<TypeMessage, string> where TypeMessage : IntegrationEvent
     {
         /// <summary>
         /// Convert the <paramref name="message"/> to json.

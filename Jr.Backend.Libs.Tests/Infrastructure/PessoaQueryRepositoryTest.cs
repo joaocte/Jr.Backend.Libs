@@ -1,12 +1,5 @@
 ﻿using Jr.Backend.Libs.Tests.TestObjjects.Domain;
 using Jr.Backend.Libs.Tests.TestObjjects.Infra;
-using Microsoft.EntityFrameworkCore;
-using NSubstitute;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Threading;
 using Xunit;
 
 namespace Jr.Backend.Libs.Tests.Infrastructure

@@ -1,8 +1,5 @@
 ﻿using Jr.Backend.Libs.Tests.TestObjjects.Domain;
 using Microsoft.EntityFrameworkCore;
-using NSubstitute;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Jr.Backend.Libs.Tests.TestObjjects.Infra
 {

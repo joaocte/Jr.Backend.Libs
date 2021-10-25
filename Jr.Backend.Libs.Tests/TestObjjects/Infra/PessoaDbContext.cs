@@ -1,10 +1,5 @@
 ﻿using Jr.Backend.Libs.Tests.TestObjjects.Domain;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Jr.Backend.Libs.Tests.TestObjjects.Infra
 {

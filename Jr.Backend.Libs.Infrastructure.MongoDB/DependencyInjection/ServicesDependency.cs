@@ -1,4 +1,5 @@
-﻿using Jr.Backend.Libs.Infrastructure.MongoDB.Abstractions.Interfaces;
+﻿using Jr.Backend.Libs.Infrastructure.MongoDB.Abstractions;
+using Jr.Backend.Libs.Infrastructure.MongoDB.Abstractions.Interfaces;
 using Jr.Backend.Libs.Infrastructure.MongoDB.Context;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,7 +10,7 @@ namespace Jr.Backend.Libs.Infrastructure.MongoDB.DependencyInjection
 {
     public static class ServicesDependency
     {
-        public static void AddServiceDependencyJrInfrastructure(this IServiceCollection services)
+        public static void AddServiceDependencyJrInfrastructureMongoDb(this IServiceCollection services, ConnectionType connectionType = ConnectionType.ReplicaSet)
         {
             var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")?.ToLowerInvariant();
             services.AddScoped<IMongoContext>((_) =>
@@ -21,7 +22,7 @@ namespace Jr.Backend.Libs.Infrastructure.MongoDB.DependencyInjection
                                  .AddEnvironmentVariables()
                                  .Build();
 
-                return new MongoContext(config);
+                return new MongoContext(config, connectionType);
             });
         }
     }

@@ -1,4 +1,5 @@
-﻿using Jr.Backend.Libs.Infrastructure.MongoDB.Abstractions.Interfaces;
+﻿using Jr.Backend.Libs.Infrastructure.MongoDB.Abstractions;
+using Jr.Backend.Libs.Infrastructure.MongoDB.Abstractions.Interfaces;
 using Microsoft.Extensions.Configuration;
 using MongoDB.Driver;
 using System;
@@ -15,20 +16,29 @@ namespace Jr.Backend.Libs.Infrastructure.MongoDB.Context
         public MongoClient MongoClient { get; set; }
         private readonly List<Func<Task>> commands;
 
+        private readonly ConnectionType conectionType;
         private readonly IConfiguration configuration;
 
         /// <inheritdoc/>
-        public MongoContext(IConfiguration configuration)
+        public MongoContext(IConfiguration configuration, ConnectionType conectionType = ConnectionType.ReplicaSet)
         {
             this.configuration = configuration;
 
             commands = new List<Func<Task>>();
+            this.conectionType = conectionType;
         }
 
-        public async Task<int> SaveChanges()
+        public virtual async Task<int> SaveChanges()
         {
             ConfigureMongo();
 
+            return ConnectionType.ReplicaSet.Equals(this.conectionType)
+                ? await SaveChangesReplicaSet()
+                : await SaveChangesDirectConnection();
+        }
+
+        private async Task<int> SaveChangesReplicaSet()
+        {
             using (Session = await MongoClient.StartSessionAsync().ConfigureAwait(false))
             {
                 Session.StartTransaction();
@@ -39,6 +49,15 @@ namespace Jr.Backend.Libs.Infrastructure.MongoDB.Context
 
                 await Session.CommitTransactionAsync().ConfigureAwait(false);
             }
+
+            return commands.Count;
+        }
+
+        private async Task<int> SaveChangesDirectConnection()
+        {
+            var commandTasks = commands.Select(c => c());
+
+            await Task.WhenAll(commandTasks).ConfigureAwait(false);
 
             return commands.Count;
         }

@@ -27,7 +27,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jr.Backend.Libs.Infrastruct
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Utilities", "Utilities", "{093F9A3C-9602-4123-A016-4168334E6931}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jr.Backend.Libs.Utilities", "Jr.Backend.Libs.Utilities\Jr.Backend.Libs.Utilities.csproj", "{579DA187-42E8-40FF-818F-18C6280CE827}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jr.Backend.Libs.Utilities", "Jr.Backend.Libs.Utilities\Jr.Backend.Libs.Utilities.csproj", "{579DA187-42E8-40FF-818F-18C6280CE827}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docker", "Docker", "{F6EF25E5-E893-4E50-A7DF-B349882ACAB5}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -84,6 +89,7 @@ Global
 		{717D6BDD-E337-4AE4-9D1B-F227B4FAD53A} = {300D5B95-42B9-4362-B0DF-7A383FBCBC4F}
 		{0B682350-84F1-48CA-AD53-58F648372D81} = {300D5B95-42B9-4362-B0DF-7A383FBCBC4F}
 		{579DA187-42E8-40FF-818F-18C6280CE827} = {093F9A3C-9602-4123-A016-4168334E6931}
+		{F6EF25E5-E893-4E50-A7DF-B349882ACAB5} = {093F9A3C-9602-4123-A016-4168334E6931}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {741E6B9F-048F-40E5-A078-9C9EC9860203}

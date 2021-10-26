@@ -45,5 +45,7 @@ namespace Jr.Backend.Libs.Domain.Abstractions.Interfaces.Repository
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         Task RemoveAsync(object id, CancellationToken cancellationToken = default);
+
+        Task<bool> ExistsAsync(object id, CancellationToken cancellationToken = default);
     }
 }

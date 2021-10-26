@@ -3,7 +3,6 @@ using Jr.Backend.Libs.Infrastructure.MongoDB.Abstractions.Interfaces;
 using MongoDB.Driver;
 using ServiceStack;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -32,10 +31,10 @@ namespace Jr.Backend.Libs.Infrastructure.MongoDB.Repository
         public virtual async Task<TEntity> GetByIdAsync(object id, CancellationToken cancellationToken = default)
         {
             var data = await _dbSet
-                .FindAsync(Builders<TEntity>.Filter.Eq("_id", id), null, cancellationToken)
+                .FindAsync(Builders<TEntity>.Filter.Eq("_id", id.ToString()), null, cancellationToken)
                 .ConfigureAwait(false);
 
-            return data.SingleOrDefault();
+            return await data.SingleOrDefaultAsync(cancellationToken);
         }
 
         /// <inheritdoc/>
@@ -56,7 +55,7 @@ namespace Jr.Backend.Libs.Infrastructure.MongoDB.Repository
         /// <inheritdoc/>
         public virtual async Task RemoveAsync(object id, CancellationToken cancellationToken = default)
         {
-            await _context.AddCommand(() => _dbSet.DeleteOneAsync(Builders<TEntity>.Filter.Eq("_id", id), cancellationToken)).ConfigureAwait(false);
+            await _context.AddCommand(() => _dbSet.DeleteOneAsync(Builders<TEntity>.Filter.Eq("_id", id.ToString()), cancellationToken)).ConfigureAwait(false);
         }
 
         /// <inheritdoc/>
@@ -72,5 +71,14 @@ namespace Jr.Backend.Libs.Infrastructure.MongoDB.Repository
 
         /// <inheritdoc/>
         public void Dispose() => Dispose(true);
+
+        public async Task<bool> ExistsAsync(object id, CancellationToken cancellationToken = default)
+        {
+            var data = await _dbSet
+                .FindAsync(Builders<TEntity>.Filter.Eq("_id", id.ToString()), null, cancellationToken)
+                .ConfigureAwait(false);
+
+            return await data.AnyAsync(cancellationToken);
+        }
     }
 }

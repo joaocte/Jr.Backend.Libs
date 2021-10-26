@@ -145,5 +145,16 @@ namespace Jr.Backend.Libs.Infrastructure.EntityFramework
         {
             Dispose(disposing: true);
         }
+
+        public async Task<bool> ExistsAsync(object id, CancellationToken cancellationToken = default)
+        {
+            if (id == null)
+            {
+                throw new ArgumentNullException(nameof(id));
+            }
+
+            T obj = await _dbContext.Set<T>().FindAsync(id, cancellationToken).ConfigureAwait(false);
+            return obj != null;
+        }
     }
 }

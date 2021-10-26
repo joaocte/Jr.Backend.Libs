@@ -1,6 +1,8 @@
-﻿using Jr.Backend.Libs.Infrastructure.MongoDB.Abstractions;
+﻿using Jr.Backend.Libs.Domain.Abstractions.Interfaces.Repository;
+using Jr.Backend.Libs.Infrastructure.MongoDB.Abstractions;
 using Jr.Backend.Libs.Infrastructure.MongoDB.Abstractions.Interfaces;
 using Jr.Backend.Libs.Infrastructure.MongoDB.Context;
+using Jr.Backend.Libs.Infrastructure.MongoDB.UoW;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -24,6 +26,8 @@ namespace Jr.Backend.Libs.Infrastructure.MongoDB.DependencyInjection
 
                 return new MongoContext(config, connectionType);
             });
+
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
         }
     }
 }

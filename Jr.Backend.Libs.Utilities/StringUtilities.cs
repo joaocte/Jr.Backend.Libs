@@ -458,5 +458,17 @@ namespace Jr.Backend.Libs.Utilities
         {
             return string.IsNullOrEmpty(mainString);
         }
+
+        /// <summary>
+        /// Converts an string to a Guid. This could be used within a unit test to mock objects.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static Guid ToGuid(this string value)
+        {
+            Guid.TryParse(value, out Guid result);
+
+            return result;
+        }
     }
 }

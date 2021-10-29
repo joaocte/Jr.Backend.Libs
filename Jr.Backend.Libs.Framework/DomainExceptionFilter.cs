@@ -33,7 +33,7 @@ namespace Jr.Backend.Libs.Framework
 
         private void HandleException(ExceptionContext context)
         {
-            Type type = context.Exception.GetType().BaseType;
+            Type type = context.Exception.GetType();
             if (exceptionHandlers.ContainsKey(type))
             {
                 exceptionHandlers[type].Invoke(context);

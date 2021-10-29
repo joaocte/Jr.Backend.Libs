@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace Jr.Backend.Libs.Domain.Abstractions.Interfaces.Exceptions
+namespace Jr.Backend.Libs.Domain.Abstractions.Exceptions
 {
     /// <summary>
     /// Dispara uma <see cref="Exception"/> do tipo <see cref="DomainException"/>.
     /// </summary>
-    public abstract class DomainException : Exception
+    public class DomainException : Exception
     {
         protected DomainException()
         {

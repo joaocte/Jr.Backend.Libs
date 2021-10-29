@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace Jr.Backend.Libs.Domain.Abstractions.Interfaces.Exceptions
+namespace Jr.Backend.Libs.Domain.Abstractions.Exceptions
 {
     public class ForbiddenAccessException : Exception
     {

@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using Jr.Backend.Libs.Domain.Abstractions.Interfaces.Exceptions;
+using Jr.Backend.Libs.Domain.Abstractions.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
@@ -20,8 +20,8 @@ namespace Jr.Backend.Libs.Framework
                 { typeof(NotFoundException), HandleNotFoundException },
                 { typeof(UnauthorizedAccessException), HandleUnauthorizedAccessException },
                 { typeof(ForbiddenAccessException), HandleForbiddenAccessException },
-                {typeof(DomainException), HandleDomainException },
-                {typeof(AlreadyRegisteredException), HandleAlreadyRegisteredException },
+                { typeof(DomainException), HandleDomainException },
+                { typeof(AlreadyRegisteredException), HandleAlreadyRegisteredException },
                 { typeof(InfrastructureException), HandleInfrastructureException }
             };
         }
@@ -33,7 +33,7 @@ namespace Jr.Backend.Libs.Framework
 
         private void HandleException(ExceptionContext context)
         {
-            Type type = context.Exception.GetType();
+            Type type = context.Exception.GetType().BaseType;
             if (exceptionHandlers.ContainsKey(type))
             {
                 exceptionHandlers[type].Invoke(context);

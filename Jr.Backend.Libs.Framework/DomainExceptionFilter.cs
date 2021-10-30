@@ -1,170 +1,145 @@
-﻿using FluentValidation;
-using Jr.Backend.Libs.Domain.Abstractions.Exceptions;
+﻿using Jr.Backend.Libs.Domain.Abstractions.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using System;
-using System.Collections.Generic;
 
 namespace Jr.Backend.Libs.Framework
 {
     public sealed class DomainExceptionFilter : IExceptionFilter
     {
-        private readonly IDictionary<Type, Action<ExceptionContext>> exceptionHandlers;
-
-        public DomainExceptionFilter()
-        {
-            exceptionHandlers = new Dictionary<Type, Action<ExceptionContext>>
-            {
-                { typeof(ValidationException), HandleValidationException },
-                { typeof(NotFoundException), HandleNotFoundException },
-                { typeof(UnauthorizedAccessException), HandleUnauthorizedAccessException },
-                { typeof(ForbiddenAccessException), HandleForbiddenAccessException },
-                { typeof(DomainException), HandleDomainException },
-                { typeof(AlreadyRegisteredException), HandleAlreadyRegisteredException },
-                { typeof(InfrastructureException), HandleInfrastructureException }
-            };
-        }
-
         public void OnException(ExceptionContext context)
         {
-            HandleException(context);
-        }
-
-        private void HandleException(ExceptionContext context)
-        {
-            Type type = context.Exception.GetType();
-            if (exceptionHandlers.ContainsKey(type))
+            if (context.Exception is DomainException)
             {
-                exceptionHandlers[type].Invoke(context);
-                return;
+                var exception = context.Exception as DomainException;
+
+                var details = new ProblemDetails()
+                {
+                    Type = "https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400",
+                    Title = "Bad Request",
+                    Detail = exception.Message,
+                    Status = StatusCodes.Status400BadRequest
+                };
+
+                context.Result = new ObjectResult(details)
+                {
+                    StatusCode = StatusCodes.Status400BadRequest
+                };
+
+                context.ExceptionHandled = true;
             }
-            HandleInfrastructureException(context);
-        }
-
-        private void HandleAlreadyRegisteredException(ExceptionContext context)
-        {
-            var exception = context.Exception as AlreadyRegisteredException;
-
-            var details = new ProblemDetails()
+            else if (context.Exception is AlreadyRegisteredException)
             {
-                Type = "https://datatracker.ietf.org/doc/html/rfc7231#section-6.5.8",
-                Title = "The specified resource already registred",
-                Detail = exception.Message,
-                Status = StatusCodes.Status409Conflict
-            };
+                var exception = context.Exception as AlreadyRegisteredException;
 
-            context.Result = new ObjectResult(details)
+                var details = new ProblemDetails()
+                {
+                    Type = "https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/409",
+                    Title = "The request could not be completed due to a conflict.",
+                    Detail = exception.Message,
+                    Status = StatusCodes.Status409Conflict
+                };
+
+                context.Result = new ObjectResult(details)
+                {
+                    StatusCode = StatusCodes.Status409Conflict
+                };
+
+                context.ExceptionHandled = true;
+            }
+            else if (context.Exception is ForbiddenAccessException)
             {
-                StatusCode = StatusCodes.Status409Conflict
-            };
+                var exception = context.Exception as ForbiddenAccessException;
 
-            context.ExceptionHandled = true;
-        }
+                var details = new ProblemDetails()
+                {
+                    Type = "https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403",
+                    Title = "The client did not have permission to access the requested resource.",
+                    Detail = exception.Message,
+                    Status = StatusCodes.Status403Forbidden
+                };
 
-        private void HandleDomainException(ExceptionContext context)
-        {
-            var domainException = context.Exception as DomainException;
+                context.Result = new ObjectResult(details)
+                {
+                    StatusCode = StatusCodes.Status403Forbidden
+                };
 
-            var details = new ProblemDetails()
+                context.ExceptionHandled = true;
+            }
+            else if (context.Exception is InfrastructureException)
             {
-                Type = "",
-                Title = "Unprocessable Entity",
-                Detail = domainException.Message,
-                Status = StatusCodes.Status422UnprocessableEntity
-            };
+                var exception = context.Exception as InfrastructureException;
 
-            context.Result = new ObjectResult(details)
+                var details = new ProblemDetails()
+                {
+                    Type = "https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/503",
+                    Title = "The server was unavailable.",
+                    Detail = exception.Message,
+                    Status = StatusCodes.Status503ServiceUnavailable
+                };
+
+                context.Result = new ObjectResult(details)
+                {
+                    StatusCode = StatusCodes.Status503ServiceUnavailable
+                };
+
+                context.ExceptionHandled = true;
+            }
+            else if (context.Exception is NotFoundException)
             {
-                StatusCode = StatusCodes.Status422UnprocessableEntity
-            };
+                var exception = context.Exception as NotFoundException;
 
-            context.ExceptionHandled = true;
-        }
+                var details = new ProblemDetails()
+                {
+                    Type = "https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404",
+                    Title = "The requested resource was not found.",
+                    Detail = exception.Message,
+                    Status = StatusCodes.Status404NotFound
+                };
 
-        private void HandleForbiddenAccessException(ExceptionContext context)
-        {
-            var details = new ProblemDetails
+                context.Result = new ObjectResult(details)
+                {
+                    StatusCode = StatusCodes.Status404NotFound
+                };
+
+                context.ExceptionHandled = true;
+            }
+            else if (context.Exception is NoContentException)
             {
-                Status = StatusCodes.Status403Forbidden,
-                Title = "Forbidden",
-                Type = "https://tools.ietf.org/html/rfc7231#section-6.5.3"
-            };
+                var exception = context.Exception as NoContentException;
 
-            context.Result = new ObjectResult(details)
+                var details = new ProblemDetails()
+                {
+                    Type = "https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/204",
+                    Title = "The server has fulfilled the request but does not need to return a response body.",
+                    Detail = exception.Message,
+                    Status = StatusCodes.Status204NoContent
+                };
+
+                context.Result = new ObjectResult(details)
+                {
+                    StatusCode = StatusCodes.Status204NoContent
+                };
+
+                context.ExceptionHandled = true;
+            }
+            else
             {
-                StatusCode = StatusCodes.Status403Forbidden
-            };
+                var details = new ProblemDetails()
+                {
+                    Type = "https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500",
+                    Title = "The request was not completed due to an internal error on the server side.",
+                    Detail = context.Exception.Message,
+                    Status = StatusCodes.Status500InternalServerError
+                };
 
-            context.ExceptionHandled = true;
-        }
+                context.Result = new ObjectResult(details)
+                {
+                    StatusCode = StatusCodes.Status500InternalServerError
+                };
 
-        private void HandleInfrastructureException(ExceptionContext context)
-        {
-            var details = new ProblemDetails
-            {
-                Status = StatusCodes.Status500InternalServerError,
-                Title = "An error occurred while processing your request.",
-                Type = "https://tools.ietf.org/html/rfc7231#section-6.6.1"
-            };
-
-            context.Result = new ObjectResult(details)
-            {
-                StatusCode = StatusCodes.Status500InternalServerError
-            };
-
-            context.ExceptionHandled = true;
-        }
-
-        private void HandleNotFoundException(ExceptionContext context)
-        {
-            var exception = context.Exception as NotFoundException;
-
-            var details = new ProblemDetails()
-            {
-                Type = "https://tools.ietf.org/html/rfc7231#section-6.5.4",
-                Title = "The specified resource was not found.",
-                Detail = exception.Message,
-                Status = StatusCodes.Status404NotFound
-            };
-
-            context.Result = new NotFoundObjectResult(details);
-
-            context.ExceptionHandled = true;
-        }
-
-        private void HandleUnauthorizedAccessException(ExceptionContext context)
-        {
-            var details = new ProblemDetails
-            {
-                Status = StatusCodes.Status401Unauthorized,
-                Title = "Unauthorized",
-                Type = "https://tools.ietf.org/html/rfc7235#section-3.1",
-                Detail = context.Exception.Message
-            };
-
-            context.Result = new ObjectResult(details)
-            {
-                StatusCode = StatusCodes.Status401Unauthorized
-            };
-
-            context.ExceptionHandled = true;
-        }
-
-        private void HandleValidationException(ExceptionContext context)
-        {
-            var exception = context.Exception as ValidationException;
-
-            var details = new ProblemDetails
-            {
-                Status = StatusCodes.Status400BadRequest,
-                Title = "BadRequest",
-                Type = "https://tools.ietf.org/html/rfc7231#section-6.5.1",
-                Detail = string.Join("\n", exception.Errors)
-            };
-            context.Result = new BadRequestObjectResult(details);
-
-            context.ExceptionHandled = true;
+                context.ExceptionHandled = true;
+            }
         }
     }
 }

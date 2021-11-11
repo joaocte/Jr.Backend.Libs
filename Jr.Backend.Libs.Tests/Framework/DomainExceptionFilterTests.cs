@@ -17,7 +17,7 @@ namespace Jr.Backend.Libs.Tests.Framework
     {
         private readonly ActionContext actionContext;
         private readonly ActionDescriptor actionDescriptor;
-        private readonly DomainExceptionFilter domainExceptionFilter;
+        private readonly CustomExceptionFilter domainExceptionFilter;
         private readonly ExceptionContext exceptionContext;
         private readonly List<IFilterMetadata> filters;
         private readonly HttpContext httpContext;
@@ -31,7 +31,7 @@ namespace Jr.Backend.Libs.Tests.Framework
             actionContext = Substitute.For<ActionContext>(httpContext, routeData, actionDescriptor);
             filters = Substitute.For<List<IFilterMetadata>>();
             exceptionContext = Substitute.For<ExceptionContext>(actionContext, filters);
-            domainExceptionFilter = new DomainExceptionFilter();
+            domainExceptionFilter = new CustomExceptionFilter();
         }
 
         [Fact]

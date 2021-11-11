@@ -3,7 +3,7 @@
 	<PropertyGroup>
 		<TargetFramework>net5.0</TargetFramework>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<Version>1.0.0-alpha-05</Version>
+		<Version>1.0.0-alpha-06</Version>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -13,5 +13,6 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\Jr.Backend.Libs.Domain.Abstractions\Jr.Backend.Libs.Domain.Abstractions.csproj" />
+		<ProjectReference Include="..\Jr.Backend.Libs.Domain\Jr.Backend.Libs.Domain.csproj" />
 	</ItemGroup>
 </Project>

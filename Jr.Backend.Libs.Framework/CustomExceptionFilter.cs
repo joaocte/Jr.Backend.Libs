@@ -7,11 +7,11 @@ using System.Collections.Generic;
 
 namespace Jr.Backend.Libs.Framework
 {
-    public sealed class DomainExceptionFilter : IExceptionFilter
+    public sealed class CustomExceptionFilter : IExceptionFilter
     {
         private readonly IDictionary<Type, Action<ExceptionContext>> exceptionHandlers;
 
-        public DomainExceptionFilter()
+        public CustomExceptionFilter()
         {
             exceptionHandlers = new Dictionary<Type, Action<ExceptionContext>> {
                 {typeof(DomainException), DomainExceptionHandler},

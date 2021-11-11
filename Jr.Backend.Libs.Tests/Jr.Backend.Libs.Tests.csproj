@@ -5,14 +5,14 @@
 
 		<IsPackable>false</IsPackable>
 
-		<Version>1.0.0-alpha-05</Version>
+		<Version>1.0.0-alpha-06</Version>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<PackageReference Include="FluentValidation" Version="10.3.4" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="5.0.11" />
-		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.0.0" />
 		<PackageReference Include="Moq" Version="4.16.1" />
 		<PackageReference Include="NSubstitute" Version="4.2.2" />
 		<PackageReference Include="NSubstitute.Analyzers.CSharp" Version="1.0.14" />

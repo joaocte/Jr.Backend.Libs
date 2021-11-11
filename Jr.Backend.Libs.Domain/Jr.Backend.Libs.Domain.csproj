@@ -5,10 +5,14 @@
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<AssemblyVersion>1.0.0.1</AssemblyVersion>
 		<FileVersion>1.0.0.1</FileVersion>
-		<Version>1.0.0-alpha-06</Version>
+		<Version>1.0.0-alpha-09</Version>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="FluentValidation" Version="10.2.3" />
+		<PackageReference Include="FluentValidation" Version="10.3.4" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Jr.Backend.Libs.Domain.Abstractions\Jr.Backend.Libs.Domain.Abstractions.csproj" />
 	</ItemGroup>
 </Project>

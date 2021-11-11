@@ -1,14 +1,11 @@
-﻿namespace Jr.Backend.Libs.Domain.Notifications
-{
-    public class Notification
-    {
-        public string Key { get; }
-        public string Message { get; }
+﻿using Jr.Backend.Libs.Domain.Abstractions.Notifications;
 
-        public Notification(string key, string message)
+namespace Jr.Backend.Libs.Domain.Notifications
+{
+    public class Notification : NotificationAbstract
+    {
+        public Notification(string key, string message) : base(key, message)
         {
-            Key = key;
-            Message = message;
         }
     }
 }

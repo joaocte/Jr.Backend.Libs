@@ -1,43 +1,46 @@
 ﻿using FluentValidation.Results;
+using Jr.Backend.Libs.Domain.Abstractions.Notifications;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Jr.Backend.Libs.Domain.Notifications
 {
-    public class NotificationContext
+    public class NotificationContext : INotificationContext
     {
-        private readonly List<Notification> _notifications;
-        public IReadOnlyCollection<Notification> Notifications => _notifications;
-        public bool HasNotifications => _notifications.Any();
+        private readonly List<NotificationAbstract> notifications;
+
+        public IReadOnlyCollection<NotificationAbstract> GetNotifications() => notifications;
+
+        public bool HasNotifications() => notifications.Any();
 
         public NotificationContext()
         {
-            _notifications = new List<Notification>();
+            notifications = new List<NotificationAbstract>();
         }
 
         public void AddNotification(string key, string message)
         {
-            _notifications.Add(new Notification(key, message));
+            notifications.Add(new Notification(key, message));
         }
 
-        public void AddNotification(Notification notification)
+        public void AddNotification(NotificationAbstract notification)
         {
-            _notifications.Add(notification);
+            notifications.Add(notification);
         }
 
-        public void AddNotifications(IReadOnlyCollection<Notification> notifications)
+        public void AddNotifications(IReadOnlyCollection<NotificationAbstract> notifications)
         {
-            _notifications.AddRange(notifications);
+            this.notifications.AddRange(notifications);
         }
 
-        public void AddNotifications(IList<Notification> notifications)
+        public void AddNotifications(IList<NotificationAbstract> notifications)
         {
-            _notifications.AddRange(notifications);
+            this.notifications.AddRange(notifications);
         }
 
-        public void AddNotifications(ICollection<Notification> notifications)
+        public void AddNotifications(ICollection<NotificationAbstract> notifications)
         {
-            _notifications.AddRange(notifications);
+            this.notifications.AddRange(notifications);
         }
 
         public void AddNotifications(ValidationResult validationResult)

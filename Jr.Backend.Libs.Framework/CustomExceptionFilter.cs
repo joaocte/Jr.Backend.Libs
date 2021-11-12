@@ -31,7 +31,7 @@ namespace Jr.Backend.Libs.Framework
                 exceptionHandlers[type].Invoke(context);
                 return;
             }
-            InfrastructureExceptionHandler(context);
+            GerenicExceptionHandler(context);
         }
 
         private void AlreadyRegisteredExceptionHandler(ExceptionContext context)
@@ -89,6 +89,26 @@ namespace Jr.Backend.Libs.Framework
             context.Result = new ObjectResult(details)
             {
                 StatusCode = StatusCodes.Status403Forbidden
+            };
+
+            context.ExceptionHandled = true;
+        }
+
+        private void GerenicExceptionHandler(ExceptionContext context)
+        {
+            var exception = context.Exception;
+
+            var details = new ProblemDetails()
+            {
+                Type = "https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500",
+                Title = "The server was unavailable.",
+                Detail = exception.Message,
+                Status = StatusCodes.Status500InternalServerError
+            };
+
+            context.Result = new ObjectResult(details)
+            {
+                StatusCode = StatusCodes.Status500InternalServerError
             };
 
             context.ExceptionHandled = true;

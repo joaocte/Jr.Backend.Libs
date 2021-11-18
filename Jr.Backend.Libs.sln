@@ -33,6 +33,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Framework", "Framework", "{
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jr.Backend.Libs.Framework", "Jr.Backend.Libs.Framework\Jr.Backend.Libs.Framework.csproj", "{8B287E48-BFBA-4E34-8D57-7055132A6234}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Extensions", "Extensions", "{27C60027-8B70-41E0-88A2-E3596EFB20E1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jr.Backend.Libs.Extensions", "Jr.Backend.Libs.Extensions\Jr.Backend.Libs.Extensions.csproj", "{04A135DA-FF73-41F1-A199-3893A4E28633}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -79,6 +83,10 @@ Global
 		{8B287E48-BFBA-4E34-8D57-7055132A6234}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B287E48-BFBA-4E34-8D57-7055132A6234}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8B287E48-BFBA-4E34-8D57-7055132A6234}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04A135DA-FF73-41F1-A199-3893A4E28633}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04A135DA-FF73-41F1-A199-3893A4E28633}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04A135DA-FF73-41F1-A199-3893A4E28633}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04A135DA-FF73-41F1-A199-3893A4E28633}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -93,6 +101,7 @@ Global
 		{0B682350-84F1-48CA-AD53-58F648372D81} = {300D5B95-42B9-4362-B0DF-7A383FBCBC4F}
 		{579DA187-42E8-40FF-818F-18C6280CE827} = {093F9A3C-9602-4123-A016-4168334E6931}
 		{8B287E48-BFBA-4E34-8D57-7055132A6234} = {01A2A3ED-0B2E-445B-AD7E-04095D6A31FC}
+		{04A135DA-FF73-41F1-A199-3893A4E28633} = {27C60027-8B70-41E0-88A2-E3596EFB20E1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {741E6B9F-048F-40E5-A078-9C9EC9860203}

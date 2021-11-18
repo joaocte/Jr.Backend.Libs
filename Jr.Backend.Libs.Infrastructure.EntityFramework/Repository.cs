@@ -156,5 +156,10 @@ namespace Jr.Backend.Libs.Infrastructure.EntityFramework
             T obj = await _dbContext.Set<T>().FindAsync(id, cancellationToken).ConfigureAwait(false);
             return obj != null;
         }
+
+        public async Task<IQueryable<T>> GetAllAsQueryableAsync(CancellationToken cancellationToken = default)
+        {
+            return await Task.Run(() => _dbContext.Set<T>().AsQueryable());
+        }
     }
 }

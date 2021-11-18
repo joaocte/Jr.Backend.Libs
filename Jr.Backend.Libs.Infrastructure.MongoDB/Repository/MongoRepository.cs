@@ -3,6 +3,7 @@ using Jr.Backend.Libs.Infrastructure.MongoDB.Abstractions.Interfaces;
 using MongoDB.Driver;
 using ServiceStack;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -79,6 +80,11 @@ namespace Jr.Backend.Libs.Infrastructure.MongoDB.Repository
                 .ConfigureAwait(false);
 
             return await data.AnyAsync(cancellationToken);
+        }
+
+        public async Task<IQueryable<TEntity>> GetAllAsQueryableAsync(CancellationToken cancellationToken = default)
+        {
+            return await Task.Run(() => _dbSet.AsQueryable());
         }
     }
 }

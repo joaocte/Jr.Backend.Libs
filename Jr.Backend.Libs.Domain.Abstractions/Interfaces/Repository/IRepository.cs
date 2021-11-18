@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -47,5 +48,12 @@ namespace Jr.Backend.Libs.Domain.Abstractions.Interfaces.Repository
         Task RemoveAsync(object id, CancellationToken cancellationToken = default);
 
         Task<bool> ExistsAsync(object id, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        ///TODO
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        Task<IQueryable<T>> GetAllAsQueryableAsync(CancellationToken cancellationToken = default);
     }
 }

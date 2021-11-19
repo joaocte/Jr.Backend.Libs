@@ -38,15 +38,6 @@ namespace Jr.Backend.Libs.Infrastructure.EntityFramework.Abstractions.QueryRepos
         /// </summary>
         /// <typeparam name="TEntity">The type of the entity.</typeparam>
         /// <param name="condition">The conditon on which entity will be returned.</param>
-        /// <param name="cancellationToken"> A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
-        /// <returns>Returns <typeparamref name="TEntity"/>.</returns>
-        Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> condition, CancellationToken cancellationToken = default);
-
-        /// <summary>
-        /// This method takes <see cref="Expression{Func}"/> as parameter and returns <typeparamref name="TEntity"/>.
-        /// </summary>
-        /// <typeparam name="TEntity">The type of the entity.</typeparam>
-        /// <param name="condition">The conditon on which entity will be returned.</param>
         /// <param name="asNoTracking">A <see cref="bool"/> value which determines whether the return entity will be tracked by
         /// EF Core context or not. Defualt value is false i.e trackig is enabled by default.
         /// </param>
@@ -194,6 +185,16 @@ namespace Jr.Backend.Libs.Infrastructure.EntityFramework.Abstractions.QueryRepos
         /// </param>
         /// <param name="cancellationToken"> A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>Returns <see cref="Task{TResult}"/>.</returns>
+
+        /// <summary>
+        /// This method takes <see cref="Expression"/> as parameter and returns <typeparamref name="TEntity"/>.
+        /// </summary>
+        /// <typeparam name="TEntity">The type of the entity.</typeparam>
+        /// <param name="condition">The conditon on which entity will be returned.</param>
+        /// <param name="cancellationToken"> A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
+        /// <returns>Returns <typeparamref name="TEntity"/>.</returns>
+        Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> condition, CancellationToken cancellationToken = default);
+
         Task<TEntity> GetByIdAsync(
             object id,
             Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> includes,

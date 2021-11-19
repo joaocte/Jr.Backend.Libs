@@ -2,8 +2,10 @@
 using Jr.Backend.Libs.Infrastructure.MongoDB.Abstractions.Interfaces;
 using MongoDB.Driver;
 using ServiceStack;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -36,6 +38,11 @@ namespace Jr.Backend.Libs.Infrastructure.MongoDB.Repository
                 .ConfigureAwait(false);
 
             return await data.SingleOrDefaultAsync(cancellationToken);
+        }
+
+        public virtual async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> condition, CancellationToken cancellationToken = default)
+        {
+            return await Task.Run(() => _dbSet.AsQueryable().Where(condition).FirstNonDefault());
         }
 
         /// <inheritdoc/>

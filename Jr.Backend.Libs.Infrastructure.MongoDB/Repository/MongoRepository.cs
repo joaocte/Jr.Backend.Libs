@@ -45,6 +45,11 @@ namespace Jr.Backend.Libs.Infrastructure.MongoDB.Repository
             return await Task.Run(() => _dbSet.AsQueryable().Where(condition).FirstNonDefault());
         }
 
+        public virtual async Task<bool> ExistsAsync(Expression<Func<TEntity, bool>> condition, CancellationToken cancellationToken = default)
+        {
+            return await Task.Run(() => _dbSet.AsQueryable().Any(condition));
+        }
+
         /// <inheritdoc/>
         public virtual async Task<IEnumerable<TEntity>> GetAllAsync(CancellationToken cancellationToken = default)
         {

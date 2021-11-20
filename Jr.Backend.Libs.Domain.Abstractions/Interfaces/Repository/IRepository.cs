@@ -41,6 +41,8 @@ namespace Jr.Backend.Libs.Domain.Abstractions.Interfaces.Repository
         /// <returns>Returns <typeparamref name="T"/>.</returns>
         Task<T> GetAsync(Expression<Func<T, bool>> condition, CancellationToken cancellationToken = default);
 
+        Task<bool> ExistsAsync(Expression<Func<T, bool>> condition, CancellationToken cancellationToken = default);
+
         /// <summary>
         ///TODO
         /// </summary>

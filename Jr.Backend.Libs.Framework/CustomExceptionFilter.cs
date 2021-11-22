@@ -14,12 +14,13 @@ namespace Jr.Backend.Libs.Framework
         public CustomExceptionFilter()
         {
             exceptionHandlers = new Dictionary<Type, Action<ExceptionContext>> {
-                {typeof(DomainException), DomainExceptionHandler},
+                {typeof(BadRequestException), BadRequestExceptionHandler},
                 {typeof(AlreadyRegisteredException), AlreadyRegisteredExceptionHandler},
                 {typeof(ForbiddenAccessException), ForbiddenAccessExceptionHandler},
                 {typeof(InfrastructureException), InfrastructureExceptionHandler},
                 {typeof(NotFoundException), NotFoundExceptionHandler},
-                {typeof(NoContentException), NoContentExceptionHandler}
+                {typeof(NoContentException), NoContentExceptionHandler},
+                {typeof(UnauthorizedException), UnauthorizedExceptionHandler}
             };
         }
 
@@ -54,9 +55,9 @@ namespace Jr.Backend.Libs.Framework
             context.ExceptionHandled = true;
         }
 
-        private void DomainExceptionHandler(ExceptionContext context)
+        private void BadRequestExceptionHandler(ExceptionContext context)
         {
-            var exception = context.Exception as DomainException;
+            var exception = context.Exception as BadRequestException;
 
             var details = new ProblemDetails()
             {
@@ -89,6 +90,26 @@ namespace Jr.Backend.Libs.Framework
             context.Result = new ObjectResult(details)
             {
                 StatusCode = StatusCodes.Status403Forbidden
+            };
+
+            context.ExceptionHandled = true;
+        }
+
+        private void UnauthorizedExceptionHandler(ExceptionContext context)
+        {
+            var exception = context.Exception as UnauthorizedException;
+
+            var details = new ProblemDetails()
+            {
+                Type = "https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401",
+                Title = "Access denied!",
+                Detail = exception?.Message,
+                Status = StatusCodes.Status401Unauthorized
+            };
+
+            context.Result = new ObjectResult(details)
+            {
+                StatusCode = StatusCodes.Status401Unauthorized
             };
 
             context.ExceptionHandled = true;

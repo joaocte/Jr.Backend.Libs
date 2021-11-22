@@ -15,5 +15,22 @@ namespace Jr.Backend.Libs.Framework.DependencyInjection
                 options.Filters.Add<CustomExceptionFilter>();
             });
         }
+
+        public static void AddServiceDependencyJrFrameworkNotificationContext(this IServiceCollection services)
+        {
+            services.AddScoped<INotificationContext, NotificationContext>();
+            services.AddMvcCore(options =>
+            {
+                options.Filters.Add<NotificationFilter>();
+            });
+        }
+
+        public static void AddServiceDependencyJrFrameworkCustomExceptionFilter(this IServiceCollection services)
+        {
+            services.AddMvcCore(options =>
+            {
+                options.Filters.Add<CustomExceptionFilter>();
+            });
+        }
     }
 }

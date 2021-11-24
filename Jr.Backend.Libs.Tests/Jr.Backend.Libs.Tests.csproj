@@ -5,7 +5,7 @@
 
 		<IsPackable>false</IsPackable>
 
-		<Version>1.0.0-alpha-19</Version>
+		<Version>1.0.0-alpha-20</Version>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -36,5 +36,7 @@
 		<ProjectReference Include="..\Jr.Backend.Libs.Infrastructure.MongoDB.Abstractions\Jr.Backend.Libs.Infrastructure.MongoDB.Abstractions.csproj" />
 		<ProjectReference Include="..\Jr.Backend.Libs.Infrastructure.MongoDB\Jr.Backend.Libs.Infrastructure.MongoDB.csproj" />
 		<ProjectReference Include="..\Jr.Backend.Libs.Messaging.Abstractions\Jr.Backend.Libs.Messaging.Abstractions.csproj" />
+		<ProjectReference Include="..\Jr.Backend.Libs.Security.Abstractions\Jr.Backend.Libs.Security.Abstractions.csproj" />
+		<ProjectReference Include="..\Jr.Backend.Libs.Security\Jr.Backend.Libs.Security.csproj" />
 	</ItemGroup>
 </Project>

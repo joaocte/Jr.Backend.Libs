@@ -41,7 +41,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Security", "Security", "{56
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jr.Backend.Libs.Security", "Jr.Backend.Libs.Security\Jr.Backend.Libs.Security.csproj", "{DC57D84A-2651-48B6-A2ED-AA08D6C197E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jr.Backend.Libs.Security.Abstractions", "Jr.Backend.Libs.Security.Abstractions\Jr.Backend.Libs.Security.Abstractions.csproj", "{D7605B22-16A8-4F26-95A6-6DE784B91533}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jr.Backend.Libs.Security.Abstractions", "Jr.Backend.Libs.Security.Abstractions\Jr.Backend.Libs.Security.Abstractions.csproj", "{D7605B22-16A8-4F26-95A6-6DE784B91533}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

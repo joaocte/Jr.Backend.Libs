@@ -115,7 +115,7 @@ namespace Jr.Backend.Libs.Framework
             context.ExceptionHandled = true;
         }
 
-        private void GerenicExceptionHandler(ExceptionContext context)
+        private static void GerenicExceptionHandler(ExceptionContext context)
         {
             var exception = context.Exception;
 

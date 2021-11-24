@@ -6,9 +6,18 @@
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<AssemblyVersion>1.0.0.1</AssemblyVersion>
 		<FileVersion>1.0.0.1</FileVersion>
-		<Version>1.0.0-alpha-19</Version>
+		<Version>1.0.0-alpha-20</Version>
 		<AssemblyName>Jr.Backend.Libs.Infrastructure.MongoDB</AssemblyName>
 		<RootNamespace>Jr.Backend.Libs.Infrastructure.MongoDB</RootNamespace>
+		
+		
+		
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+	  <DefineConstants>DEBUG;TRACE</DefineConstants>
+		<DebugType>full</DebugType>
+		<DebugSymbols>true</DebugSymbols>
 	</PropertyGroup>
 
 	<ItemGroup>

@@ -1,12 +1,9 @@
-﻿using Jr.Backend.Libs.Domain.Abstractions.Exceptions;
-using Jr.Backend.Libs.Security.Abstractions;
+﻿using Jr.Backend.Libs.Security.Abstractions;
 using Jr.Backend.Libs.Security.Abstractions.Application;
 using Jr.Backend.Libs.Security.Abstractions.Infrastructure.Interface;
-using Microsoft.IdentityModel.Tokens;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Jr.Backend.Libs.Security.Application
@@ -20,15 +17,11 @@ namespace Jr.Backend.Libs.Security.Application
             this.tenantRepository = tenantRepository;
         }
 
-        public void Dispose()
-        {
-            tenantRepository.Dispose();
-        }
-
         public async Task<bool> ExecuteAsync(string token)
         {
+            var validToken = token.Replace("bearer", "").TrimStart();
             var handler = new JwtSecurityTokenHandler();
-            var jwtSecurityToken = handler.ReadJwtToken(token);
+            var jwtSecurityToken = handler.ReadJwtToken(validToken);
             var clientId = jwtSecurityToken.Claims.FirstOrDefault(x => x.Type == "ClientId")?.Value;
             var clientSecret = jwtSecurityToken.Claims.FirstOrDefault(x => x.Type == "ClientSecret")?.Value;
             var tenantName = jwtSecurityToken.Claims.FirstOrDefault(x => x.Type == "TenantName")?.Value;
@@ -41,25 +34,24 @@ namespace Jr.Backend.Libs.Security.Application
                 x.ClientId == clientIdGuid && x.ClientSecret == clientSecretGuid);
 
             if (tenant == null)
-                throw new BadRequestException("Token Informado é Iválido");
+                throw new UnauthorizedAccessException("Token Informado é Iválido");
 
-            var validationParameters = GetValidationParameters();
-            SecurityToken validatedToken;
-            var principal = handler.ValidateToken(token, validationParameters, out validatedToken);
+            var validationParameters = Constants.TokenValidationParameters;
+            var principal = handler.ValidateToken(validToken, validationParameters, out _);
             return true;
         }
 
-        private static TokenValidationParameters GetValidationParameters()
+        protected virtual void Dispose(bool disposing)
         {
-            return new TokenValidationParameters()
+            if (disposing)
             {
-                ValidateLifetime = false,
-                ValidateAudience = false,
-                ValidateIssuer = false,
-                ValidIssuer = null,
-                ValidAudience = null,
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Constants.PrivateKey)) // The same key as the one that generate the token
-            };
+                tenantRepository?.Dispose();
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
         }
     }
 }

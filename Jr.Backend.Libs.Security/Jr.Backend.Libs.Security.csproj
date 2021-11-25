@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.0.0-alpha-22</Version>
+    <Version>1.0.0-alpha-34</Version>
 	  
 	  
 	  
@@ -27,6 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Jr.Backend.Libs.API.Abstractions\Jr.Backend.Libs.API.Abstractions.csproj" />
     <ProjectReference Include="..\Jr.Backend.Libs.Domain.Abstractions\Jr.Backend.Libs.Domain.Abstractions.csproj" />
     <ProjectReference Include="..\Jr.Backend.Libs.Framework\Jr.Backend.Libs.Framework.csproj" />
     <ProjectReference Include="..\Jr.Backend.Libs.Infrastructure.MongoDB.Abstractions\Jr.Backend.Libs.Infrastructure.MongoDB.Abstractions.csproj" />

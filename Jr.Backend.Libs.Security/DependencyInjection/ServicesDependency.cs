@@ -1,14 +1,20 @@
-﻿using Jr.Backend.Libs.Security.Abstractions;
+﻿using Jr.Backend.Libs.API.Abstractions;
+using Jr.Backend.Libs.Security.Abstractions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
+using System;
 
 namespace Jr.Backend.Libs.Security.DependencyInjection
 {
     public static class ServicesDependency
     {
-        public static void AddServiceDependencyJrSecurityApi(this IServiceCollection services)
+        private static IJrApiOption _jrApiOption;
+
+        public static void AddServiceDependencyJrSecurityApi(this IServiceCollection services, Func<IJrApiOption> options = null)
         {
+            if (options != null) _jrApiOption = options() ?? new JrApiOption();
+
             services.AddAuthentication(x =>
                 {
                     x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

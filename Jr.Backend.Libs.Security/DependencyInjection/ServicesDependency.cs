@@ -1,13 +1,13 @@
-﻿using Jr.Backend.Libs.Infrastructure.MongoDB.Abstractions;
-using Jr.Backend.Libs.Security.Abstractions;
+﻿using Jr.Backend.Libs.Security.Abstractions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.OpenApi.Models;
 
 namespace Jr.Backend.Libs.Security.DependencyInjection
 {
     public static class ServicesDependency
     {
-        public static void AddServiceDependencyJrSecurityApi(this IServiceCollection services, ConnectionType connectionType = ConnectionType.ReplicaSet)
+        public static void AddServiceDependencyJrSecurityApi(this IServiceCollection services)
         {
             services.AddAuthentication(x =>
                 {
@@ -20,27 +20,34 @@ namespace Jr.Backend.Libs.Security.DependencyInjection
                     x.SaveToken = true;
                     x.TokenValidationParameters = Constants.TokenValidationParameters;
                 });
+
+            services.AddSwaggerGen(c =>
+            {
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Description = "Bearer {token}",
+                    Name = "Authorization",
+                    Scheme = "Bearer",
+                    BearerFormat = "JWT",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey
+                });
+
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            }
+                        },
+                        new string[] {}
+                    }
+                });
+            });
         }
-
-        //public static void AddServiceDependencyJrSecurityAuth(this IServiceCollection services, ConnectionType connectionType = ConnectionType.ReplicaSet)
-        //{
-        //    services.AddScoped<IMongoContext>((p) =>
-        //    {
-        //        var config = new ConfigurationBuilder()
-        //            .AddInMemoryCollection(SecurityConfiguration.InMemoryDesCollection)
-        //            .Build();
-
-        //        return new MongoContext(config, connectionType);
-        //    });
-        //    services.AddScoped<ITenantRepository>(p =>
-        //    {
-        //        var mongoContext = p.GetService<IMongoContext>();
-        //        return new TenantRepository(mongoContext, nameof(Tenant));
-        //    });
-
-        //    services.AddServiceDependencyJrFrameworkCustomExceptionFilter();
-        //    AddServiceDependencyJrSecurityApi(services);
-        //    services.AddScoped<IValidateToken, ValidateToken>();
-        //}
     }
 }

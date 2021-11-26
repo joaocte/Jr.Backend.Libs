@@ -1,6 +1,6 @@
 ﻿using Jr.Backend.Libs.Security.Abstractions;
 using Jr.Backend.Libs.Security.Abstractions.Application;
-using Jr.Backend.Libs.Security.Abstractions.Infrastructure.Interface;
+using Jr.Backend.Libs.Security.Abstractions.Infrastructure.Interfaces;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
@@ -10,9 +10,9 @@ namespace Jr.Backend.Libs.Security.Application
 {
     public class ValidateToken : IValidateToken
     {
-        private readonly ITenantRepository tenantRepository;
+        private readonly ITenantRepositorySecurity tenantRepository;
 
-        public ValidateToken(ITenantRepository tenantRepository)
+        public ValidateToken(ITenantRepositorySecurity tenantRepository)
         {
             this.tenantRepository = tenantRepository;
         }

@@ -8,12 +8,12 @@ namespace Jr.Backend.Libs.API.DependencyInjection
 {
     public static class UseJrApi
     {
-        public static void UseJrApiSwagger(this IApplicationBuilder app, IWebHostEnvironment env, Func<JrApiOption> options = null)
+        public static void UseJrApiSwagger(this IApplicationBuilder app, IWebHostEnvironment env, Func<IJrApiOption> options = null)
         {
             JrApiOption jrApiOption = new();
             if (options != null)
             {
-                jrApiOption = options();
+                jrApiOption = options() as JrApiOption;
             }
 
             if (env.IsDevelopment())
@@ -23,7 +23,7 @@ namespace Jr.Backend.Libs.API.DependencyInjection
             }
         }
 
-        public static void UseJrApiSwaggerSecurity(this IApplicationBuilder app, IWebHostEnvironment env, Func<JrApiOption> options = null)
+        public static void UseJrApiSwaggerSecurity(this IApplicationBuilder app, IWebHostEnvironment env, Func<IJrApiOption> options = null)
         {
             app.UseHttpsRedirection();
 

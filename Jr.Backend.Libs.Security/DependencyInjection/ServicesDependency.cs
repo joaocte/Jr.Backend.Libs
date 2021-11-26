@@ -1,6 +1,11 @@
-﻿using Jr.Backend.Libs.API.Abstractions;
-using Jr.Backend.Libs.Security.Abstractions;
+﻿using Jr.Backend.Libs.Security.Abstractions;
+using Jr.Backend.Libs.Security.Abstractions.Application;
+using Jr.Backend.Libs.Security.Abstractions.Infrastructure.Interfaces;
+using Jr.Backend.Libs.Security.Application;
+using Jr.Backend.Libs.Security.Context;
+using Jr.Backend.Libs.Security.Infrastructure.Repository.MongoDb;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using System;
@@ -9,12 +14,8 @@ namespace Jr.Backend.Libs.Security.DependencyInjection
 {
     public static class ServicesDependency
     {
-        private static IJrApiOption _jrApiOption;
-
-        public static void AddServiceDependencyJrSecurityApi(this IServiceCollection services, Func<IJrApiOption> options = null)
+        public static void AddServiceDependencyJrSecurityApi(this IServiceCollection services)
         {
-            if (options != null) _jrApiOption = options() ?? new JrApiOption();
-
             services.AddAuthentication(x =>
                 {
                     x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -54,6 +55,20 @@ namespace Jr.Backend.Libs.Security.DependencyInjection
                     }
                 });
             });
+        }
+
+        public static void AddServiceDependencyJrSecurityApiUsingCustomValidate(this IServiceCollection services, Func<ISecurityConfiguration> configuration)
+        {
+            services.AddScoped<IMongoContextSecurity>((_) =>
+            {
+                var securityConfiguration = configuration();
+                var config = new ConfigurationBuilder().AddInMemoryCollection(securityConfiguration.InMemoryCollection).Build();
+
+                return new MongoContextSecurity(config);
+            });
+            services.AddScoped<ITenantRepositorySecurity, TenantRepositorySecurity>();
+            services.AddScoped<IValidateToken, ValidateToken>();
+            AddServiceDependencyJrSecurityApi(services);
         }
     }
 }

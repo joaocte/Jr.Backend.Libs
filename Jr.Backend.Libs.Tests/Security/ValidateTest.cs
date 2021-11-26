@@ -1,10 +1,10 @@
 ﻿using Jr.Backend.Libs.Security.Abstractions.Application;
 using Jr.Backend.Libs.Security.Abstractions.Entity;
-using Jr.Backend.Libs.Security.Abstractions.Infrastructure.Interface;
 using Jr.Backend.Libs.Security.Application;
 using NSubstitute;
 using System;
 using System.Linq.Expressions;
+using Jr.Backend.Libs.Security.Abstractions.Infrastructure.Interfaces;
 using Xunit;
 
 namespace Jr.Backend.Libs.Tests.Security
@@ -12,11 +12,11 @@ namespace Jr.Backend.Libs.Tests.Security
     public class ValidateTest
     {
         private readonly IValidateToken validateToken;
-        private readonly ITenantRepository tenantRepository;
+        private readonly ITenantRepositorySecurity tenantRepository;
 
         public ValidateTest()
         {
-            tenantRepository = Substitute.For<ITenantRepository>();
+            tenantRepository = Substitute.For<ITenantRepositorySecurity>();
             validateToken = new ValidateToken(tenantRepository);
         }
 

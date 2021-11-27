@@ -34,12 +34,12 @@ namespace Jr.Backend.Libs.Security.Infrastructure.Repository
 
         public virtual async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> condition, CancellationToken cancellationToken = default)
         {
-            return await Task.Run(() => DbSet.AsQueryable().Where(condition).FirstOrDefault());
+            return await Task.Run(() => DbSet.AsQueryable().Where(condition).FirstOrDefault(), cancellationToken);
         }
 
         public virtual async Task<bool> ExistsAsync(Expression<Func<TEntity, bool>> condition, CancellationToken cancellationToken = default)
         {
-            return await Task.Run(() => DbSet.AsQueryable().Any(condition));
+            return await Task.Run(() => DbSet.AsQueryable().Any(condition), cancellationToken);
         }
 
         /// <inheritdoc/>
@@ -48,7 +48,7 @@ namespace Jr.Backend.Libs.Security.Infrastructure.Repository
             var all = await DbSet.
                 FindAsync(Builders<TEntity>.Filter.Empty, null, cancellationToken)
                 .ConfigureAwait(false);
-            return await all.ToListAsync().ConfigureAwait(false);
+            return await all.ToListAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
         }
 
         /// <inheritdoc/>

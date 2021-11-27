@@ -1,4 +1,5 @@
 ﻿using Jr.Backend.Libs.Security.Abstractions.Application;
+using Jr.Backend.Libs.Security.Middleware;
 using Microsoft.AspNetCore.Http;
 using NSubstitute;
 
@@ -9,14 +10,14 @@ namespace Jr.Backend.Libs.Tests.Security
         private readonly RequestDelegate requestDelegate;
         private readonly HttpContext context;
 
-        //private readonly SecurityMiddleware securityMiddleware;
+        private readonly SecurityMiddleware securityMiddleware;
         private readonly IValidateToken validateToken;
 
         public SecurityMiddlewareTests()
         {
             context = Substitute.For<HttpContext>();
             validateToken = Substitute.For<IValidateToken>();
-            //securityMiddleware = new SecurityMiddleware(requestDelegate);
+            securityMiddleware = new SecurityMiddleware(requestDelegate);
         }
 
         //[Fact]

@@ -3,9 +3,9 @@
 	<PropertyGroup>
 		<TargetFramework>net5.0</TargetFramework>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<AssemblyVersion>1.0.1-alpha-02.1</AssemblyVersion>
-		<FileVersion>1.0.1-alpha-02.1</FileVersion>
-		<Version>1.0.1-alpha-02</Version>
+		<AssemblyVersion>1.0.1-alpha-03</AssemblyVersion>
+		<FileVersion>1.0.1-alpha-03</FileVersion>
+		<Version>1.0.1-alpha-03</Version>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

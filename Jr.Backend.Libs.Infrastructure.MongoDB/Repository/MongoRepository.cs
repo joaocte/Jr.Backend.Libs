@@ -42,12 +42,12 @@ namespace Jr.Backend.Libs.Infrastructure.MongoDB.Repository
 
         public virtual async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> condition, CancellationToken cancellationToken = default)
         {
-            return await Task.Run(() => _dbSet.AsQueryable().Where(condition).FirstNonDefault());
+            return await Task.Run(() => _dbSet.AsQueryable().Where(condition).FirstNonDefault(), cancellationToken);
         }
 
         public virtual async Task<bool> ExistsAsync(Expression<Func<TEntity, bool>> condition, CancellationToken cancellationToken = default)
         {
-            return await Task.Run(() => _dbSet.AsQueryable().Any(condition));
+            return await Task.Run(() => _dbSet.AsQueryable().Any(condition), cancellationToken);
         }
 
         /// <inheritdoc/>
@@ -56,13 +56,13 @@ namespace Jr.Backend.Libs.Infrastructure.MongoDB.Repository
             var all = await _dbSet.
                 FindAsync(Builders<TEntity>.Filter.Empty, null, cancellationToken)
                 .ConfigureAwait(false);
-            return await all.ToListAsync().ConfigureAwait(false);
+            return await all.ToListAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
         }
 
         /// <inheritdoc/>
         public virtual async Task UpdateAsync(TEntity obj, CancellationToken cancellationToken = default)
         {
-            await _context.AddCommand(() => _dbSet.ReplaceOneAsync(Builders<TEntity>.Filter.Eq("_id", obj.GetId()), obj)).ConfigureAwait(false);
+            await _context.AddCommand(() => _dbSet.ReplaceOneAsync(Builders<TEntity>.Filter.Eq("_id", obj.GetId()), obj, cancellationToken: cancellationToken)).ConfigureAwait(false);
         }
 
         /// <inheritdoc/>
@@ -96,7 +96,7 @@ namespace Jr.Backend.Libs.Infrastructure.MongoDB.Repository
 
         public async Task<IQueryable<TEntity>> GetAllAsQueryableAsync(CancellationToken cancellationToken = default)
         {
-            return await Task.Run(() => _dbSet.AsQueryable());
+            return await Task.Run(() => _dbSet.AsQueryable(), cancellationToken);
         }
     }
 }

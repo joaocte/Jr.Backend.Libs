@@ -1,5 +1,7 @@
-﻿using Jr.Backend.Libs.Security.Abstractions;
+﻿using Jr.Backend.Libs.Framework.DependencyInjection;
+using Jr.Backend.Libs.Security.Abstractions;
 using Jr.Backend.Libs.Security.Abstractions.Application;
+using Jr.Backend.Libs.Security.Abstractions.Entity;
 using Jr.Backend.Libs.Security.Abstractions.Infrastructure.Interfaces;
 using Jr.Backend.Libs.Security.Application;
 using Jr.Backend.Libs.Security.Context;
@@ -62,13 +64,27 @@ namespace Jr.Backend.Libs.Security.DependencyInjection
             services.AddScoped<IMongoContextSecurity>((_) =>
             {
                 var securityConfiguration = configuration();
-                var config = new ConfigurationBuilder().AddInMemoryCollection(securityConfiguration.InMemoryCollection).Build();
+                if (securityConfiguration == null)
+                    throw new ArgumentNullException(nameof(configuration));
+
+                var config =
+                    new ConfigurationBuilder()
+                    .AddInMemoryCollection(securityConfiguration.InMemoryCollection)
+                    .Build();
 
                 return new MongoContextSecurity(config);
             });
-            services.AddScoped<ITenantRepositorySecurity, TenantRepositorySecurity>();
-            services.AddScoped<IValidateToken, ValidateToken>();
+
+            services.AddScoped<ITenantRepositorySecurity>(p =>
+            {
+                var mongoContext = p.GetService<IMongoContextSecurity>();
+                return new TenantRepositorySecurity(mongoContext, nameof(Tenant));
+            });
+
+            services.AddServiceDependencyJrFrameworkCustomExceptionFilter();
+
             AddServiceDependencyJrSecurityApi(services);
+            services.AddScoped<IValidateToken, ValidateToken>();
         }
     }
 }

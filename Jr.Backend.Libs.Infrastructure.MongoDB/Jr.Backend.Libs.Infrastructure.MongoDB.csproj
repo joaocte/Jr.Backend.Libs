@@ -6,7 +6,7 @@
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<AssemblyVersion>1.0.1-alpha-03</AssemblyVersion>
 		<FileVersion>1.0.1-alpha-03</FileVersion>
-		<Version>1.0.1-alpha-03</Version>
+		<Version>1.0.1</Version>
 		<AssemblyName>Jr.Backend.Libs.Infrastructure.MongoDB</AssemblyName>
 		<RootNamespace>Jr.Backend.Libs.Infrastructure.MongoDB</RootNamespace>
 		

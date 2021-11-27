@@ -4,9 +4,9 @@
 		<TargetFramework>net5.0</TargetFramework>
 		<Description>Lib utilizada na Parte de infrastruture dos projetos do Jr.</Description>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<AssemblyVersion>1.0.0.1</AssemblyVersion>
-		<FileVersion>1.0.0.1</FileVersion>
-		<Version>1.0.0</Version>
+		<AssemblyVersion>1.0.1-alpha-03</AssemblyVersion>
+		<FileVersion>1.0.1-alpha-03</FileVersion>
+		<Version>1.0.1</Version>
 		<AssemblyName>Jr.Backend.Libs.Infrastructure.MongoDB</AssemblyName>
 		<RootNamespace>Jr.Backend.Libs.Infrastructure.MongoDB</RootNamespace>
 		
@@ -36,5 +36,6 @@
 		<ProjectReference Include="..\Jr.Backend.Libs.Domain.Abstractions\Jr.Backend.Libs.Domain.Abstractions.csproj" />
 		<ProjectReference Include="..\Jr.Backend.Libs.Domain\Jr.Backend.Libs.Domain.csproj" />
 		<ProjectReference Include="..\Jr.Backend.Libs.Infrastructure.MongoDB.Abstractions\Jr.Backend.Libs.Infrastructure.MongoDB.Abstractions.csproj" />
+		<ProjectReference Include="..\Jr.Backend.Libs.Security.Abstractions\Jr.Backend.Libs.Security.Abstractions.csproj" />
 	</ItemGroup>
 </Project>
